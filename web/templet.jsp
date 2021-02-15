@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Bootstrap 4 Website Example</title>
+<title>올랑올랑</title>
  <link rel="stylesheet" type="text/css" href="css/style.css">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,7 +52,7 @@
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/TourSearch.do">관광지 추천</a></li>
+					href="${pageContext.request.contextPath}/tourSearch.do">관광지 추천</a></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">게시판</a>
 					<div class="dropdown-menu">

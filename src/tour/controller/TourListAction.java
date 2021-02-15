@@ -5,10 +5,9 @@ import common.controller.AbstractAction;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TourSearchAction extends AbstractAction {
+public class TourListAction extends AbstractAction {
 
-    public TourSearchAction() {
-
+    public TourListAction() {
     }
 
     @Override
@@ -16,7 +15,7 @@ public class TourSearchAction extends AbstractAction {
 
         req.setAttribute("msg", "index");
 
-        this.setViewPage("tour/tourSearch.jsp");
+        this.setViewPage("tour/tourList.jsp");
         this.setRedirect(false);
     }
 }
