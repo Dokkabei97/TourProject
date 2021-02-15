@@ -29,5 +29,6 @@
     <!-- 매퍼 정의================================ -->
     <mappers>
         <!-- <mapper resource="org/mybatis/example/BlogMapper.xml" /> -->
+        <mapper resource="common/mapper/SampleMapper.xml"/>
     </mappers>
 </configuration>
