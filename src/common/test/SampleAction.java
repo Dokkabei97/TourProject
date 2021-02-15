@@ -17,7 +17,7 @@ public class SampleAction extends AbstractAction {
         req.setAttribute("msg", "안녕 Sample");
         req.setAttribute("count", count);
 
-        this.setViewPage("/templet.jsp");
+        this.setViewPage("/test.jsp");
         this.setRedirect(false); // redirect
     }
 }

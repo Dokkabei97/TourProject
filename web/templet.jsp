@@ -72,10 +72,7 @@
 	</nav>
 
     <div class="m-5 p-3 text-center" style="border:1px solid gray; border-radius:15px">
-		<h1>
-			t4er계정의 테이블 수 (by MyBatis)
-		</h1>
-		<h2 style="color:#ff0000">count: ${count}</h2>
+		<h1 id="font2">test</h1>
     </div>
 
 
