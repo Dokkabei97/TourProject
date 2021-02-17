@@ -4,4 +4,17 @@
 <c:set var="myctx" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/top.jsp"/>
 
+<script src="./js/tourKeyword.js"></script>
+
+<div id="warp">
+    <form>
+        <label>방문목적</label>
+        <input type="text" name="keyword" id="keyword" placeholder="키워드를 입력하세요" class="search">
+        <button id="btnKeyword">검색</button>
+    </form>
+</div>
+<div id="openAPI">
+
+</div>
+
 <jsp:include page="/foot.jsp"/>

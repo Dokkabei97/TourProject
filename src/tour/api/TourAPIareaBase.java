@@ -25,6 +25,7 @@ public class TourAPIareaBase {
         urlBuilder.append("&" + URLEncoder.encode("cat3","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*소분류 코드(cat1,cat2필수)*/
         urlBuilder.append("&" + URLEncoder.encode("listYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); /*목록 구분 (Y=목록, N=개수)*/
         urlBuilder.append("&" + URLEncoder.encode("modifiedtime","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*콘텐츠 수정일*/
+        urlBuilder.append("&_type=json"); // json 형식으로 받아오기
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
@@ -44,5 +45,6 @@ public class TourAPIareaBase {
         rd.close();
         conn.disconnect();
         System.out.println(sb.toString());
+        System.out.println(urlBuilder);
     }
 }
