@@ -4,4 +4,7 @@
 <c:set var="myctx" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/top.jsp"/>
 
+${searchKeyword}
+
+
 <jsp:include page="/foot.jsp"/>
