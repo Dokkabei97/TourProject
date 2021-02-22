@@ -80,6 +80,38 @@ public class TourAPIKeyword {
         System.out.println("sb= " + sb.toString());
         System.out.println("urlBuilder= " + urlBuilder);
 
+        /* JSON-SIMPLE lib 이용
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
+        JSONObject parse_response = (JSONObject) jsonObj.get("response");
+        JSONObject parse_body = (JSONObject) parse_response.get("body");// response 로 부터 body 찾아오기
+        JSONObject parse_items = (JSONObject) parse_body.get("items");// body 로 부터 items 받아오기
+        // items로 부터 itemlist 를 받아오기 itemlist : 뒤에 [ 로 시작하므로 jsonarray이다.
+        JSONArray parse_item = (JSONArray) parse_items.get("item");
+
+        JSONObject obj;
+
+
+        for (int i = 0; i < parse_item.size(); i++) {
+            obj = (JSONObject) parse_item.get(i); // 해당 item을 가져옵니다.
+
+            String title = (String) obj.get("title");
+            String addr1 = (String) obj.get("addr1");
+            String addr2 = (String) obj.get("addr2");
+            String tel = (String) obj.get("tel");
+            int contenttypeId = (int) obj.get("contenttypeid");
+            String firstImage = (String) obj.get("firstimage");
+            String firstImage2 = (String) obj.get("firstimage2");
+            int readCount = (int) obj.get("readcount");
+            java.sql.Date createdtime = (java.sql.Date) obj.get("createdtime");
+            java.sql.Date modifiedTime = (java.sql.Date) obj.get("modifiedtime");
+
+            System.out.println(title + " : " + addr1 + " : " + addr2 + " : " + tel + " : " + contenttypeId + " : " +
+                    firstImage + " : " + firstImage2 + " : " + readCount + " : " + createdtime + " : " + modifiedTime);
+        }
+        */
+
+
         List<TourVO> datalist = new ArrayList<TourVO>();
 
         return datalist;
