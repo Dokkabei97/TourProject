@@ -29,5 +29,7 @@
     <!-- 매퍼 정의================================ -->
     <mappers>
         <mapper resource="common/mapper/SampleMapper.xml"/>
+        <mapper resource="common/mapper/TourMapper.xml"/>
+        <mapper resource="common/mapper/ReviewMapper.xml"/>
     </mappers>
 </configuration>
