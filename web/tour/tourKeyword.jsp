@@ -7,7 +7,7 @@
 <script src="./js/tourKeyword.js"></script>
 
 <div id="warp">
-    <form><!-- name="tourF" id="tourF" action="tourList.do" method="get">-->
+    <form name="tourF" id="tourF" action="tourList.do" method="get">
         <label>방문목적</label>
         <input type="text" name="keyword" id="keyword" placeholder="키워드를 입력하세요" class="search">
         <button id="btnKeyword">검색</button>
