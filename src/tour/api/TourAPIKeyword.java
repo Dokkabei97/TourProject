@@ -80,7 +80,7 @@ public class TourAPIKeyword {
         System.out.println("sb= " + sb.toString());
         System.out.println("urlBuilder= " + urlBuilder);
 
-        /* JSON-SIMPLE lib 이용
+        /* JSON-SIMPLE lib 이용해서 json 데이터 읽어들이기?
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
         JSONObject parse_response = (JSONObject) jsonObj.get("response");
