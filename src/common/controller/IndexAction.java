@@ -11,7 +11,7 @@ public class IndexAction extends AbstractAction {
         
         req.setAttribute("msg", "index");
 
-        this.setViewPage("/templet.jsp");
+        this.setViewPage("/index.jsp");
         this.setRedirect(false);
     }
 }

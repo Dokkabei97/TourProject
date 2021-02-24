@@ -21,7 +21,6 @@ public class TourListAction extends AbstractAction {
 
         TourAPIKeyword api = new TourAPIKeyword();
 
-//        List<TourVO> searchKeyword = api.viewTour(keyword);
         String searchKeyword = api.TourAPIKeyword(keyword);
 
         req.setAttribute("searchKeyword", searchKeyword);
