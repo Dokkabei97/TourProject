@@ -8,26 +8,26 @@ import common.controller.AbstractAction;
 
 public class boardViewAction extends AbstractAction {
 
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
-		String idx=req.getParameter("bnum");
-		if(idx==null||idx.trim().isEmpty()) {
-			this.setViewPage("boardList.do");
-			this.setRedirect(true);
-			return;
-		}
+    @Override
+    public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 
-		BoardDAOMyBatis dao=new BoardDAOMyBatis();
+        String idx = req.getParameter("bnum");
+        if (idx == null || idx.trim().isEmpty()) {
+            this.setViewPage("boardList.do");
+            this.setRedirect(true);
+            return;
+        }
 
-		boolean bool=dao.updateReadnum(idx.trim());
+        BoardDAOMyBatis dao = new BoardDAOMyBatis();
 
-		BoardVO board = dao.getBoard(idx.trim());
+        boolean bool = dao.updateReadnum(idx.trim());
 
-		req.setAttribute("board", board);
-		
-		this.setViewPage("board/boardView.jsp");
-		this.setRedirect(false);
-	}
+        BoardVO board = dao.getBoard(idx.trim());
+
+        req.setAttribute("board", board);
+
+        this.setViewPage("board/boardView.jsp");
+        this.setRedirect(false);
+    }
 
 }

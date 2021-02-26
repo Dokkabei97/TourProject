@@ -12,7 +12,6 @@
    </div>
 </div>
 
-
 <script type="text/javascript">
    var id_check= function(){
       if(!idf.id.value){

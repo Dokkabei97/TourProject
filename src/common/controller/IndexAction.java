@@ -7,9 +7,6 @@ public class IndexAction extends AbstractAction {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-//        System.out.println("index 호출");
-        
-        req.setAttribute("msg", "index");
 
         this.setViewPage("/index.jsp");
         this.setRedirect(false);

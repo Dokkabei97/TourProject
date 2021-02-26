@@ -5,7 +5,7 @@
             name="Tourdb"
             auth="Container"
             type="javax.sql.DataSource"
-            driverClassName="oracle.jdbc.driver.OracleDriver"
+            driverClassName="oracle.jdbc.OracleDriver"
             url="jdbc:oracle:thin:@192.168.219.105:1521:XE"
             username="t4er"
             password="t4er"

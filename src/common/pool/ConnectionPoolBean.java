@@ -12,7 +12,7 @@ public class ConnectionPoolBean {
     public ConnectionPoolBean() throws ClassNotFoundException, SQLException {
         ht = new Hashtable<>();
         // 커넥션을 저장할 자료구조
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Class.forName("oracle.jdbc.OracleDriver");
         url = "jdbc:oracle:thin:@192.168.219.105:1521:XE";
         user = "t4er";
         pwd = "t4er";
