@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -62,9 +62,9 @@
             <div class="container">
                 <ul class="pagination justify-content-center">
                     <!-- 페이지블럭 처리---------------------------- -->
-                    <c:forEach var="i" begin="${prevBlock+1}" end="${nextBlock-1}"
+                    <c:forEach var="i" begin="${prevBlock +1 }" end="${nextBlock - 1}"
 						step="1"><!-- 여기가 for(int i = prevBlock+1;i<nextBlock-1;i++)이랑 같은거에욤 -->
-                    <c:if test="${i<pageCount+1 }">
+                    <c:if test="${i < pageCount + 1 }">
                         <li class="page-item <c:if test="${cpage eq i}">active</c:if>">
                             <a class="page-link"
                                href="point.do?cpage=${i}&pageSize=${pageSize}#bbs">
@@ -73,7 +73,7 @@
                     </c:if>
                     </c:forEach>
                     <!--  ------------------------------------------->
-                    <c:if test="${nextBlock < pageCount+1 }">
+                    <c:if test="${nextBlock < pageCount + 1}">
                         <li class="page-item">
                             <a class="page-link"
                                href="point.do?cpage=${nextBlock}#bbs">
@@ -81,13 +81,11 @@
                         </li>
 
                     </c:if>
-
                 </ul>
                 <h6>전체 상품 개수: ${totalCount }</h6>
             </div>
         </div>
     </div>
-
 </div>
 
 <jsp:include page="/foot.jsp"/>

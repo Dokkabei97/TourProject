@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <ul class="nav nav-tabs mb-5">
     <li class="nav-item">
@@ -21,5 +21,4 @@
         //alert(cgnum);
         location.href = "${pageContext.request.contextPath}/productByCate.do?cgnum=" + cgnum;
     }
-
 </script>    

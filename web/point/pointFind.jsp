@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/top.jsp"/>
+
 <div class="container">
     <!-- category include --------------------- -->
     <jsp:include page="/point/category.jsp"/>
@@ -29,7 +30,7 @@
               class="form-inline">
             <input type="text" name="findKeyword" id="findKeyword"
                    placeholder="상품명을 입력하세요" class="form-control m-3" required>
-            <button class="btn btn primary">검 색</button>
+            <button class="btn btn-primary">검 색</button>
         </form>
         <!-- ----------------------------- -->
     </div>
@@ -48,6 +49,7 @@
 
             <c:if test="${bList ne null and not empty bList}">
                 <h3 class="text-center m-4">[${findKeyword}] 검색결과</h3>
+                <br>
                 <c:forEach var="pd" items="${bList}" varStatus="state">
                     <div class="col-md-3">
                         <a href="prodDetail.do?pnum=${pd.pnum}"> <img
@@ -60,26 +62,7 @@
                     </div>
                 </c:forEach>
             </c:if>
-            <div class="container">
-                <ul class="pagination justify-content-center">
-                    <!-- 페이지블럭 처리---------------------------- -->
-                    <c:forEach var="i" begin="${prevBlock+1}" end="${nextBlock-1}"
-                               step="1">>
-                        <c:if test="${i<pageCount+1 }">
-                            <li class="page-item <c:if test="${cpage eq i}">active</c:if>">
-                                <a class="page-link"
-                                   href="point.do?cpage=${i}&pageSize=${pageSize}#bbs"> ${i} </a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                    <!--  ------------------------------------------->
-                    <c:if test="${nextBlock < pageCount+1 }">
-                        <li class="page-item"><a class="page-link"
-                                                 href="point.do?cpage=${nextBlock}#bbs"> </a></li>
-                    </c:if>
-                </ul>
-                <h6>전체 상품 개수: ${totalCount }</h6>
-            </div>
+            <h6>전체 상품 개수: ${totalCount }</h6>
         </div>
     </div>
 </div>
