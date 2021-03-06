@@ -60,6 +60,6 @@
 
 	<!-- 유저정보 업데이트 -->
 	<update id="updateMyInfo" parameterType="user">
-		update member set name=#{name}, pwd=#{pwd},email=#{email},tel=#{tel} where idx=#{idx}
+		update member set name = #{name}, pwd = #{pwd}, email = #{email}, tel = #{tel} where idx = #{idx}
 	</update>
 </mapper>

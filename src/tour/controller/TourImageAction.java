@@ -1,13 +1,12 @@
 package tour.controller;
 
 import common.controller.AbstractAction;
-import tour.api.TourAPIDt;
 import tour.api.TourAPIImage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TourDetailAction extends AbstractAction {
+public class TourImageAction extends AbstractAction {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -18,13 +17,14 @@ public class TourDetailAction extends AbstractAction {
             contentId = "126508";
         }
 
-        TourAPIDt api = new TourAPIDt();
+        TourAPIImage api = new TourAPIImage();
 
-        String dtInfo = api.TourAPIDt(contentId);
+        String tourImg = api.TourAPIImage(contentId);
 
-        req.setAttribute("dtInfo", dtInfo);
+        req.setAttribute("tourImg", tourImg);
 
-        this.setViewPage("tour/tourDetail.jsp");
+        this.setViewPage("tour/tourImg.jsp");
         this.setRedirect(false);
+
     }
 }
