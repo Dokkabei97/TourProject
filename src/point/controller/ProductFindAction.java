@@ -69,11 +69,11 @@ public class ProductFindAction extends AbstractAction {
         int start = end - (pageSize - 1);
 
         List<ProductVO> bList = dao.getFindList(start, end, findKeyword);
+        List<Product_CategoryVO> clist= dao.getCategory();
 
         int pagingBlock = 5;
         int prevBlock = 0, nextBlock = 0;
 
-        System.out.println("pageCount====" + pageCount);
         prevBlock = (cpage - 1) / pagingBlock * pagingBlock;
         nextBlock = prevBlock + (pagingBlock + 1);
 
@@ -86,6 +86,7 @@ public class ProductFindAction extends AbstractAction {
         req.setAttribute("prevBlock", prevBlock);
         req.setAttribute("nextBlock", nextBlock);
         req.setAttribute("pagingBlock", pagingBlock);
+        req.setAttribute("cList", clist);
 
         this.setViewPage("point/pointFind.jsp");
         this.setRedirect(false);

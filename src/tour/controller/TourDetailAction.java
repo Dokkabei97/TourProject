@@ -2,7 +2,6 @@ package tour.controller;
 
 import common.controller.AbstractAction;
 import tour.api.TourAPIDt;
-import tour.api.TourAPIImage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

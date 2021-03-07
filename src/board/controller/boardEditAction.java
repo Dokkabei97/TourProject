@@ -25,16 +25,6 @@ public class boardEditAction extends AbstractAction {
             return;
         }
 
-        /*
-         * //업로드 할 디렉토리 생성 String path = "board/Upload"; //폴더 경로 File Folder = new
-         * File(path);
-         *
-         * // 해당 디렉토리가 없을경우 디렉토리를 생성 if (!Folder.exists()) { try{ Folder.mkdir(); //폴더
-         * 생성
-         *
-         * } catch(Exception e){ e.getStackTrace(); } }
-         */
-
         // 업로드할 디렉토리 절대경로
         ServletContext app = req.getServletContext();
         String upDir = app.getRealPath("board/Upload");
@@ -60,16 +50,16 @@ public class boardEditAction extends AbstractAction {
         // 게시판
         String bnum = mr.getParameter("bnum");
         int bnum_i = Integer.parseInt(bnum);
-        String btitle = mr.getParameter("btitle"); // 글제목
-        String bcontent = mr.getParameter("bcontent"); // 글내용
-        String bupload1 = mr.getFilesystemName("bupload1"); // 업로드1
-        String bupload2 = mr.getFilesystemName("bupload2"); // 업로드2
-        String bupload3 = mr.getFilesystemName("bupload3"); // 업로드3
-
-        System.out.println(bnum + "," + bnum_i);
+        String cg_num = mr.getParameter("upCg_code");
+        int cg_num_i = Integer.parseInt(cg_num); //게시판 분류
+        String btitle = mr.getParameter("btitle");// 글제목
+        String bcontent = mr.getParameter("bcontent");// 글내용
+        String bupload1 = mr.getFilesystemName("bupload1");// 업로드1
+        String bupload2 = mr.getFilesystemName("bupload2");// 업로드2
+        String bupload3 = mr.getFilesystemName("bupload3");// 업로드3
 
         // 후처리
-        BoardVO board = new BoardVO(bnum_i, btitle, bcontent, bupload1, bupload2, bupload3);
+        BoardVO board = new BoardVO(bnum_i, btitle, bcontent, bupload1, bupload2, bupload3, cg_num_i);
 
         BoardDAOMyBatis dao = new BoardDAOMyBatis();
 

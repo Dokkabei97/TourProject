@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 import board.model.*;
 import common.controller.AbstractAction;
 
+import java.util.List;
+
 
 public class boardEditFormAction extends AbstractAction {
 
@@ -22,6 +24,9 @@ public class boardEditFormAction extends AbstractAction {
 
         BoardDAOMyBatis dao = new BoardDAOMyBatis();
         BoardVO board = dao.getBoard(bnum);
+
+        List<CategoryVO> cateList = dao.getCategory();
+        req.setAttribute("getCategory", cateList);
 
         req.setAttribute("board", board);
         this.setViewPage("board/boardEdit.jsp");

@@ -288,7 +288,7 @@ function Detail(contentId) { // 디테일
     })
 }
 
-function sendImg(dtItems, contentId) {
+function sendImg(dtItems, contentId) { // 사진
     $.ajax({
         type: 'get',
         url: 'tourImg.do?contentid=' + contentId,
@@ -296,7 +296,7 @@ function sendImg(dtItems, contentId) {
         cache: 'false'
     }).done((res) => {
         let imgItems = res.response.body.items.item;
-        showDt(dtItems, imgItems, contentId);
+        showDt(dtItems, imgItems, contentId); // 사진 1개짜리 json 받아오면 버그 있음
     }).fail((err) => {
         alert('error: ' + err.status)
         console.dir(err)
@@ -343,32 +343,37 @@ function showDt(dtItems, imgItems, contentId) { // 디테일
             let image = img.originimgurl;
 
             str += "<img src='" + image + "' style='width: 200px;height: 150px'>"
+            // 캐롯셀 적용 해야함
         })
 
         str += "<h4> " + overview + "</h4>";
 
+        str += "<p></p>";
+
         // 카카오 지도 API
-        str += "<div id='map' style='width: 300px;height: 250px'></div>"
-        str += "<script src='//dapi.kakao.com/v2/maps/sdk.js?appkey=11a513c1218b7224c39835d20851c411'></script>"
-        str += "<script>"
-        str += "let mapContainer = document.getElementById('map')," // 지도를 표시할 div
-        str += "    mapOption = { "
-        str += "        center: new kakao.maps.LatLng(" + mapy + "," + mapx + ")," // 지도의 중심좌표
-        str += "        level: 3 "// 지도의 확대 레벨
-        str += "    }; "
-        str += "let map = new kakao.maps.Map(mapContainer, mapOption);" // 지도를 생성합니다
+        str += "<div id='map' style='width: 100%;height: 300px'> 지도 </div>";
+        str += "<script src='//dapi.kakao.com/v2/maps/sdk.js?appkey=11a513c1218b7224c39835d20851c411'></script>";
+        str += "<script>";
+        str += "var mapContainer = document.getElementById('map'),"; // 지도를 표시할 div
+        str += "    mapOption = { ";
+        str += "        center: new kakao.maps.LatLng(" + mapy + "," + mapx + "),"; // 지도의 중심좌표
+        str += "        level: 3 "; // 지도의 확대 레벨
+        str += "    }; ";
+        str += "var map = new kakao.maps.Map(mapContainer, mapOption);"; // 지도를 생성합니다
 
         // 마커가 표시될 위치입니다
-        str += "let markerPosition = new kakao.maps.LatLng(" + mapy + "," + mapx + ");"
+        str += "var markerPosition = new kakao.maps.LatLng(" + mapy + "," + mapx + ");";
 
         // 마커를 생성합니다
-        str += "let marker = new kakao.maps.Marker({"
-        str += "    position: markerPosition "
-        str += "}); "
+        str += "var marker = new kakao.maps.Marker({";
+        str += "    position: markerPosition ";
+        str += "}); ";
 
         // 마커가 지도 위에 표시되도록 설정합니다
-        str += "marker.setMap(map);"
-        str += "</script>"
+        str += "marker.setMap(map);";
+        str += "</script>";
+
+        str += "<p></p>";
 
         str += "<table class='table'> <b>상세 정보</b>";
         str += "<tr>";
