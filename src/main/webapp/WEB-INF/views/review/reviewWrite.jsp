@@ -3,25 +3,23 @@
 <%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <c:import url="/top"/>
 
-<script src="./js/reviewInput.js"></script>
+<script src="../js/reviewInput.js"></script>
 
 <form name="reviewF" id="reviewF" action="write" method="post" enctype="multipart/form-data">
     <input type="text" name="tnum" value="${contentId}">
     <input type="text" name="idx" value="${idx}">
-    <input type="text" name="rstar">
+    <input type="text" name="rstar" id="rstar">
     <table class="table table-bordered">
         <tr>
             <th style="width:20%">별점</th>
             <td style="width:80%">
                 <span>
-                <img id="image1" onmouseover="show(1)" onclick="mark(1)" onmouseout="noshow(1)" src="review/star/1.png" style="width: 15%">
-                <img id="image2" onmouseover="show(2)" onclick="mark(2)" onmouseout="noshow(2)" src="review/star/1.png" style="width: 15%">
-                <img id="image3" onmouseover="show(3)" onclick="mark(3)" onmouseout="noshow(3)" src="review/star/1.png" style="width: 15%">
-                <img id="image4" onmouseover="show(4)" onclick="mark(4)" onmouseout="noshow(4)" src="review/star/1.png" style="width: 15%">
-                <img id="image5" onmouseover="show(5)" onclick="mark(5)" onmouseout="noshow(5)" src="review/star/1.png" style="width: 15%">
+                <img id="image1" onmouseover="show(1)" onclick="mark(1)" onmouseout="noshow(1)" src="../review/star/1.png" style="width: 15%">
+                <img id="image2" onmouseover="show(2)" onclick="mark(2)" onmouseout="noshow(2)" src="../review/star/1.png" style="width: 15%">
+                <img id="image3" onmouseover="show(3)" onclick="mark(3)" onmouseout="noshow(3)" src="../review/star/1.png" style="width: 15%">
+                <img id="image4" onmouseover="show(4)" onclick="mark(4)" onmouseout="noshow(4)" src="../review/star/1.png" style="width: 15%">
+                <img id="image5" onmouseover="show(5)" onclick="mark(5)" onmouseout="noshow(5)" src="../review/star/1.png" style="width: 15%">
                 </span>
-                <br>
-                <span id="startext">평가하기</span>
             </td>
         </tr>
         <tr>
@@ -50,41 +48,19 @@
 
 <script>
     let locked = 0;
+
     function show(star) {
         if (locked)
             return;
         let i;
         let image;
         let el;
-        let e = document.getElementById('startext');
-        let stateMsg;
 
         for (i = 1; i <= star; i++) {
             image = 'image' + i;
             el = document.getElementById(image);
-            el.src = 'image/star/2.png';
+            el.src = '../review/star/2.png';
         }
-
-        switch (star) {
-            case 1:
-                stateMsg = '가지 마세요';
-                break;
-            case 2:
-                stateMsg = '기대 하지 마세요';
-                break;
-            case 3:
-                stateMsg = '괜찮아요';
-                break;
-            case 4:
-                stateMsg = '추천해요!';
-                break;
-            case 5:
-                stateMsg = '다음에 또 갈꺼에요!';
-                break;
-            default:
-                stateMsg = '';
-        }
-        e.innerHTML = stateMsg;
     }
 
     function noshow(star) {
@@ -97,7 +73,7 @@
         for (i = 1; i <= star; i++) {
             image = 'image' + i;
             el = document.getElementById(image);
-            el.src = 'image/star/1.png';
+            el.src = '../review/star/1.png';
         }
     }
 
