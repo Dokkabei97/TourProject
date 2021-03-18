@@ -67,7 +67,7 @@ public class ReviewController {
         }
 
         String oriname1, oriname2, oriname3;
-        String filename1, filename2, filename3;
+        String filename1 = "", filename2 = "", filename3 = "";
 
         if (!imgfile1.isEmpty() || !imgfile2.isEmpty() || !imgfile3.isEmpty()) {
 
@@ -77,18 +77,29 @@ public class ReviewController {
 
             UUID uuid = UUID.randomUUID();
 
-            filename1 = uuid.toString() + "-" + oriname1;
-            filename2 = uuid.toString() + "-" + oriname2;
-            filename3 = uuid.toString() + "-" + oriname3;
-
-            review.setRfile1(filename1);
-            review.setRfile2(filename2);
-            review.setRfile3(filename3);
+            if (!oriname1.isEmpty()) {
+                filename1 = uuid.toString() + "-" + oriname1;
+                review.setRfile1(filename1);
+            }
+            if (!oriname2.isEmpty()) {
+                filename2 = uuid.toString() + "-" + oriname2;
+                review.setRfile2(filename2);
+            }
+            if(!oriname3.isEmpty()) {
+                filename3 = uuid.toString() + "-" + oriname3;
+                review.setRfile3(filename3);
+            }
 
             try {
-                imgfile1.transferTo(new File(dir, filename1));
-                imgfile2.transferTo(new File(dir, filename2));
-                imgfile3.transferTo(new File(dir, filename3));
+                if (!filename1.isEmpty()) {
+                    imgfile1.transferTo(new File(dir, filename1));
+                }
+                if (!filename2.isEmpty()) {
+                    imgfile2.transferTo(new File(dir, filename2));
+                }
+                if (!filename3.isEmpty()) {
+                    imgfile3.transferTo(new File(dir, filename3));
+                }
             } catch (IOException e) {
                 log.error("파일 업로드 중 에러 발생: " + e);
             }
@@ -96,8 +107,8 @@ public class ReviewController {
 
         int n = reviewService.insertReview(review);
 
-        String str = (n > 0)? "등록 성공":"등록 실패";
-        String loc = (n > 0)? "/index":"redirect:index";
+        String str = (n > 0) ? "등록 성공" : "등록 실패";
+        String loc = (n > 0) ? "/review/list?contentId=" + contentId: "redirect:index"; // contentId 유지 되게 설정
 
         m.addAttribute("message", str);
         m.addAttribute("loc", loc);

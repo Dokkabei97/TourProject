@@ -1,14 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/top_sub.jsp" />
+<c:import url="/top_sub" />
 
 <script type="text/javascript">
 	function ready(){
 		alert('준비중에 있습니다.');
 	}
+
 </script>
 <!-- 메뉴사이드바 -->
-<jsp:include page="menubar.jsp"/>
+<c:import url="/menubar" />
 <!-- 내정보 -->
 <div class="container">
 	<div class="m-5 p-3 text-center"
@@ -37,4 +38,4 @@
 	<!-- 내정보 div -->
 </div>
 
-<jsp:include page="/foot_sub.jsp" />
+<c:import url="/foot_sub" />

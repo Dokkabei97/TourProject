@@ -6,7 +6,7 @@
    <div>
       <form name="pwdf" action="pwdCheckEnd.do" method="POST">
          <label for="id">패스워드를 입력하세요</label>
-		<input type="hidden" id="getidx" name="getidx" value=${idx }>
+         <input type="hidden" id="getidx" name="getidx" value=${idx }>
          <input type="text" autofocus="autofocus" name="pwd" id="pwd" placeholder="USER PASSWARD">
          <button type="button" onclick="pwd_check()">확 인</button>
       </form>
@@ -24,4 +24,6 @@
       pwdf.submit();
    }
 </script>
+
+
 

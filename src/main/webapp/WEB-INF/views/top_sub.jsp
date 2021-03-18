@@ -11,7 +11,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 
 <body>
@@ -44,7 +44,7 @@
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a href="index"><img src="../image/head1.png"></a>
+        <a href="/index"><img src="../image/head1.png"></a>
     </div>
     <div
             class="navbar-collapse collapse w-100 order-1 dual-collapse2 text-white">
@@ -56,7 +56,7 @@
             <c:if test="${loginUser ne null}">
                   <li class="nav-link active"><a class="nav-link" href='#'>${loginUser.id}님</a></li>
                 <li class="nav-link active"><a class="nav-link" href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
-   			 <li class="nav-link active"><a class="nav-link" href="${pageContext.request.contextPath}/mypageHome">마이페이지</a>
+   			 <li class="nav-link active"><a class="nav-link" href="${pageContext.request.contextPath}/user/myInfo?idx=${loginUser.idx}">마이페이지</a>
             </c:if>
         </ul>
     </div>
