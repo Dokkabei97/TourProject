@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/top_sub"/>
-<c:import url="/menubar"/>
+<c:import url="/user/mypageMenubar"/>
 
 
 <script type="text/javascript">
@@ -82,7 +82,6 @@
 <!-- -------------------------------- -->
 <script type="text/javascript">
 	function leave(num){
-		alert(num);
 		var n = $('#idx').val(num);
 		$('#pf').attr('action','/user/del')
 		$('#pf').submit();

@@ -33,7 +33,7 @@ public class MyPageController {
         UserVO user = this.mypageService.selectMy(idx);
         m.addAttribute("user", user);
 
-        return "mypage/mypageHome";
+        return "user/mypage/mypageHome";
     }
 
     @GetMapping("/edit")
@@ -46,20 +46,20 @@ public class MyPageController {
         UserVO user = this.mypageService.selectMy(idx);
         m.addAttribute("user", user);
 
-        return "mypage/mypageHEdit";
+        return "user/mypage/mypageHEdit";
     }
 
-    @PostMapping("/editEnd")
+    @PostMapping("/edit")
     public String mypageEditEnd(Model m, @RequestParam String idx, @ModelAttribute("user") UserVO user) {
         if (user.getIdx() == null)
-            return "mypage/mypageHome";
+            return "user/myInfo";
 
         if (user.getStat() == null)
             user.setStat("9");
         ;
         int n = this.mypageService.updateUser(user);
         String str = (n > 0) ? "정보 수정 완료" : "정보 수정 실패";
-        String loc = (n > 0) ? "MyInfo?idx=" + user.getIdx() : "javascript:history.back()";
+        String loc = (n > 0) ? "/user/myInfo?idx=" + user.getIdx() : "javascript:history.back()";
         return util.addMsgLoc(m, str, loc);
     }
 
@@ -72,6 +72,11 @@ public class MyPageController {
         String str = (n > 0) ? "탈퇴 처리가 완료되었습니다." : "탈퇴 실패";
         String loc = (n > 0) ? "/user/logout" : "javascript:history.back()";
         return util.addMsgLoc(m, str, loc);
+
+    }
+
+    @RequestMapping("/mypageMenubar")
+    public void mypageMenubar() {
 
     }
 

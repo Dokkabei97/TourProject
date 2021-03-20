@@ -11,9 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.t4er.common.CommonUtil;
-import com.t4er.point.model.Product_PagingVO;
+import com.t4er.point.model.ProductPagingVO;
 import com.t4er.point.model.ProductVO;
-import com.t4er.point.model.Product_CategoryVO;
+import com.t4er.point.model.ProductCategoryVO;
 import com.t4er.point.service.PointService;
 
 import lombok.extern.log4j.Log4j;
@@ -33,7 +33,7 @@ public class PointController {
     public String productList(Model m, HttpServletRequest req,
                               @ModelAttribute("cgnum") String cgnum,
                               @RequestHeader("User-Agent") String userAgent,
-                              @ModelAttribute("paging") Product_PagingVO paging) {
+                              @ModelAttribute("paging") ProductPagingVO paging) {
 
         // 총 상품 수 가져오기
         int totalCount = this.pointService.getProductTotalCount(paging);
@@ -60,7 +60,7 @@ public class PointController {
     @GetMapping("/category")
     public String productCategory(Model m,
                                   @RequestParam(defaultValue = "CATE") String pspe) {
-        List<Product_CategoryVO> cList = pointService.getCategory();
+        List<ProductCategoryVO> cList = pointService.getCategory();
         m.addAttribute("cList", cList);
 
         return "point/category";
@@ -70,7 +70,7 @@ public class PointController {
     public String productByCate(Model m, HttpServletRequest req,
                                 @ModelAttribute("cgnum") String cgnum,
                                 @RequestHeader("User-Agent") String userAgent,
-                                @ModelAttribute("paging") Product_PagingVO paging) {
+                                @ModelAttribute("paging") ProductPagingVO paging) {
 
         int totalCount = this.pointService.getProductTotalCount(paging);
         paging.setTotalCount(totalCount);

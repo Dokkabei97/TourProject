@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import lombok.Data;
 
 @Data
-public class Product_PagingVO {
+public class ProductPagingVO {
 
     private String cgnum;
 

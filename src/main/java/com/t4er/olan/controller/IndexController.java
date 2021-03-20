@@ -53,8 +53,4 @@ public class IndexController {
 
     }
 
-    @RequestMapping("/menubar")
-    public void menubar(){
-
-    }
 }

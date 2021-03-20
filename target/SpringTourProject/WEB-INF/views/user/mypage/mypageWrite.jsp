@@ -9,7 +9,7 @@
 
 </script>
 <!-- 메뉴사이드바 -->
-<c:import url="/menubar" />
+<c:import url="/user/mypageMenubar"/>
 <!-- 내정보 -->
 <div class="container">
 	<div class="m-5 p-3 text-center"

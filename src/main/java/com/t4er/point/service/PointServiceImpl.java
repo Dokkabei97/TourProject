@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.t4er.point.mapper.ProductMapper;
-import com.t4er.point.model.Product_PagingVO;
+import com.t4er.point.model.ProductPagingVO;
 import com.t4er.point.model.ProductVO;
-import com.t4er.point.model.Product_CategoryVO;
+import com.t4er.point.model.ProductCategoryVO;
 
 @Service("pointService")
 public class PointServiceImpl implements PointService {
@@ -22,7 +22,7 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public List<ProductVO> selectByCategory(Product_PagingVO pvo) {
+    public List<ProductVO> selectByCategory(ProductPagingVO pvo) {
         return this.productMapper.selectByCategory(pvo);
     }
 
@@ -32,12 +32,12 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public List<Product_CategoryVO> getCategory() {
+    public List<ProductCategoryVO> getCategory() {
         return this.productMapper.getCategory();
     }
 
     @Override
-    public List<ProductVO> getProdList(Product_PagingVO paging) {
+    public List<ProductVO> getProdList(ProductPagingVO paging) {
         return this.productMapper.getProdList(paging);
     }
 
@@ -47,11 +47,11 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public int getProductTotalCount(Product_PagingVO paging) {
+    public int getProductTotalCount(ProductPagingVO paging) {
         return this.productMapper.getProductTotalCount(paging);
     }
 
-    public int getProductByCateTotalCount(Product_PagingVO paging) {
+    public int getProductByCateTotalCount(ProductPagingVO paging) {
         return this.productMapper.getProductByCateTotalCount(paging);
     }
 }

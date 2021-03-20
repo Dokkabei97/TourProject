@@ -46,24 +46,25 @@
         <!-- -1값을 주면 업로드 용량 무제한  -->
     </beans:bean>
 
-<!--    &lt;!&ndash; Interceptor 설정 =====================  &ndash;&gt;
+    <!-- Interceptor 설정 =====================-->
     <interceptors>
         <interceptor>
-            <mapping path="/user/**"/>
+            <mapping path="/user/myInfo"/>
+            <mapping path="/review/write"/>
+            <mapping path="/board/insert"/>
             <mapping path="/admin/**"/>
-            <beans:bean class="com.my.common.interceptor.LoginCheckInterceptor"/>
+            <beans:bean class="com.t4er.common.interceptor.LoginCheckInterceptor"/>
         </interceptor>
-        <interceptor>
+<!--        <interceptor>
             <mapping path="/admin/**"/>
             <beans:bean class="com.my.common.interceptor.AdminCheckInterceptor"/>
-        </interceptor>
+        </interceptor>-->
     </interceptors>
 
-    &lt;!&ndash; MessageResource ======================= &ndash;&gt;
-    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+   <!-- MessageResource ======================= -->
+<!--    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <beans:property name="defaultEncoding" value="UTF-8"/>
         <beans:property name="basename" value="classpath:spring/message/messagesAnnotation"/>
     </beans:bean>-->
-
 
 </beans:beans>

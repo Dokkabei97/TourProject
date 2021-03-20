@@ -52,7 +52,7 @@
 </script>
 
 <!-- 메뉴사이드바 -->
-<c:import url="/menubar" />
+<c:import url="/user/mypageMenubar"/>
 
 <!-- 내정보 -->
 <div class="container">
@@ -76,7 +76,7 @@
             <h6 class="text-right font-weight-bold text-primary">관리자</h6>
         </c:if>
         <!-- 내정보 -->
-        <form name="meF" id="meF" action="EditEnd" method="POST">
+        <form name="meF" id="meF" action="edit" method="POST">
 
             <input type="hidden" id="idx" name="idx" value="${user.idx }">
             <table class="table table-hover" id="mypageT">

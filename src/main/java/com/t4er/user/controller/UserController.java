@@ -43,7 +43,7 @@ public class UserController {
         // 에러가 없다면 아래 로직 수행
         int n = this.userService.createUser(user);
         String str = (n > 0) ? "회원가입 완료" : "회원가입 실패";
-        String loc = (n > 0) ? "index" : "javascript:history.back()";
+        String loc = (n > 0) ? "/index" : "javascript:history.back()";
         return util.addMsgLoc(m, str, loc);
     }
 

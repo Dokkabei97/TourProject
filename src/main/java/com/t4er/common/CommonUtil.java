@@ -7,14 +7,14 @@ import org.springframework.ui.Model;
 public class CommonUtil {
 
     public String addMsgLoc(Model m, String message, String loc) {
-        m.addAttribute("message", message);
+        m.addAttribute("msg", message);
         m.addAttribute("loc", loc);
-        return "msg";
+        return "message";
     }
 
     public String addMsgBack(Model m, String message) {
-        m.addAttribute("message", message);
+        m.addAttribute("msg", message);
         m.addAttribute("loc", "javascript:history.back()");
-        return "msg";
+        return "message";
     }
 }
