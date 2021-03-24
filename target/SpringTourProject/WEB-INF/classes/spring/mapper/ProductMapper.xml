@@ -6,23 +6,21 @@
 <mapper namespace="com.t4er.point.mapper.ProductMapper">
     <select id="getProductTotalCount" resultType="int" parameterType="PPaging">
         select count(*) cnt from product
+        <if test="cgnum != null and (findKeyword ==null or findKeyword=='')">
+            <where>
+                cg_num=#{cgnum}
+            </where>
+        </if>
         <if test="findKeyword != null and findKeyword !=''">
             <include refid="findWhere"/>
             <if test="cgnum != null">
                 and cg_num=#{cgnum}
             </if>
         </if>
-        <if test="cgnum != null and findKeyword ==null">
-            <where>
-                cg_num=#{cgnum}
-            </where>
-        </if>
     </select>
 
-
     <!-- 페이징 처리후 상품보여줌 -->
-    <select id="getProdList" resultType="Product"
-            parameterType="PPaging">
+    <select id="getProdList" resultType="Product" parameterType="PPaging">
         select * from(
         select product.*, row_number() over(order by pnum desc) rn from product
         <include refid="findWhere"/>
@@ -37,20 +35,19 @@
 		product_category order by 1 asc
 	</select>
 
-    <select id="selectByCategory" resultType="Product"
-            parameterType="PPaging">
+    <select id="selectByCategory" resultType="Product" parameterType="PPaging">
         select * from(
         select product.*, row_number() over(order by pnum desc) rn from product
+        <if test="cgnum != null and (findKeyword ==null or findKeyword=='')">
+            <where>
+                cg_num=#{cgnum}
+            </where>
+        </if>
         <if test="findKeyword != null and findKeyword !=''">
             <include refid="findWhere"/>
             <if test="cgnum != null">
                 and cg_num=#{cgnum}
             </if>
-        </if>
-        <if test="cgnum != null and (findKeyword ==null or findKeyword=='')">
-            <where>
-                cg_num=#{cgnum}
-            </where>
         </if>
         )
         <![CDATA[
@@ -58,8 +55,7 @@
 	]]>
     </select>
 
-    <select id="selectByPnum" resultType="Product"
-            parameterType="int">
+    <select id="selectByPnum" resultType="Product" parameterType="int">
         select
         <include refid="product_column"/>
         from product where pnum=#{pnum}
@@ -86,8 +82,7 @@
         </if>
     </sql>
 
-    <select id="getFindList" resultType="Product"
-            parameterType="PPaging">
+    <select id="getFindList" resultType="Product" parameterType="PPaging">
         select * from(
         select a.*,row_number() over(order by pnum desc) rn from
         product a
@@ -98,15 +93,13 @@
 
     <!-- 여기부터 admin입니다 -->
     <!-- 상품등록 -->
-    <insert id="insertProduct" parameterType="Product">
-        <selectKey keyProperty="pnum" resultType="int"
-                   order="BEFORE">
+    <insert id="insertProd" parameterType="Product">
+        <selectKey keyProperty="pnum" resultType="String" order="BEFORE">
             select product_seq.nextval from dual
         </selectKey>
-        insert into product(pnum, pname, pcontent, price, pimage, pimage2,
-        pimage3, cg_num)
-        values(#{pnum}, #{pname}, #{pcontent},#{price},
-        #{pimage:VARCHAR}, #{pimage2:VARCHAR}, #{pimage3:VARCHAR}, 0)
+        insert into product(pnum, pname, pcontent, price, pimage, pimage2, pimage3, cg_num)
+        values(#{pnum}, #{pname}, #{pcontent},#{price}, #{pimage:VARCHAR}, #{pimage2:VARCHAR}, #{pimage3:VARCHAR}, 99)
     </insert>
+
 
 </mapper>

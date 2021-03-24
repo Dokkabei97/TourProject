@@ -43,8 +43,8 @@
 					<br> 사진</td>
 			</tr>
 			<tr>
-				<th>이름</th>
-				<td>${user.name }</td>
+				<th>닉네임</th>
+				<td>${user.nick }</td>
 				<th>가입일</th>
 				<td>${user.indate }</td>
 			</tr>
@@ -60,9 +60,11 @@
 			</tr>
 			<tr>
 				<th colspan="2">내포인트</th>
-				<td colspan="2">${user.point }POINT</td>
+				<td colspan="2">
+					${user.point }POINT<br>
+					<a href="/user/mypoint?idx=${user.idx }"><label>더보기</label></a>
+				</td>
 			</tr>
-
 		</table>
 		<div class="container text-right">
 			<button class="btn btn-success" id="rewrite"

@@ -26,7 +26,7 @@
             </c:if>
             <c:if test="${loginUser ne null and not empty loginUser}">
                 <c:if test="${loginUser.stat == 9}">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/admin">관리자 페이지</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/admin/index">관리자 페이지</a>
                 </c:if>
             </c:if>
         </ul>
@@ -62,7 +62,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/tourSearch">관광지 추천</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/tour/search">관광지 추천</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">게시판</a>
