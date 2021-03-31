@@ -7,8 +7,8 @@
         location.href="/review/write?contentId=" + contentId;
     }
 </script>
-<input type="text" name="contentId" value="${contentId}">
-<input type="text" name="idx" value="${idx}">
+<input type="hidden" name="contentId" value="${contentId}">
+<input type="hidden" name="idx" value="${idx}">
 <button class="btn btn-primary" onclick="goWrite(${contentId})">리뷰 작성</button>
 
 <div>

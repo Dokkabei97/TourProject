@@ -6,7 +6,6 @@
 	function ready(){
 		alert('준비중에 있습니다.');
 	}
-
 </script>
 <!-- 메뉴사이드바 -->
 <c:import url="/user/mypageMenubar"/>
@@ -16,7 +15,6 @@
 		 style="border: 1px solid gray; border-radius: 15px" id="font2">
 		<h3 class="text-bold" id="font1">나의 작성 글</h3>
 		<br>
-
 		<!-- 내가 쓴글 -->
 		<table class="table table-hover text-center" id="mypageT">
 			<tr class="table-dark  text-dark">
@@ -25,12 +23,11 @@
 				<th style="width:10%">조회수</th>
 				<th style="width:20%">작성일</th>
 			</tr>
-			<c:forEach var="board" items="${board }">
+			<c:forEach var="board" items="${board}">
 				<tr>
 					<td>
 						<c:if test="${board.cg_num==0 }">
-							<a href="/board/boardView.do?bnum=<c:out value="${board.bnum}"/>">
-								여행지 추천</a>
+							<a>여행지 추천</a>
 						</c:if>
 						<c:if test="${board.cg_num==1 }">
 							<a>자유게시판</a>
@@ -48,5 +45,4 @@
 	</div>
 	<!-- 내정보 div -->
 </div>
-
 <c:import url="/foot_sub" />
