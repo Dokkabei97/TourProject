@@ -8,7 +8,7 @@ $(function () {
             $('#keyword').focus();
             return;
         }
-        let url = "/tour/list?keyword=" + keyword + "&pageNo=" + pstart;
+        let url = "/tour/keywordList?keyword=" + keyword + "&pageNo=" + pstart;
         send(url, keyword, 1);
     })
 })
@@ -84,7 +84,7 @@ function showPage(total, keyword, display, pageNo) { // 페이징 처리
 }
 
 function fetch(keyword, start, pageNo) { // 페이지
-    let url = "/tour/list?keyword=" + keyword + "&pageNo=" + pageNo;
+    let url = "/tour/keywordList?keyword=" + keyword + "&pageNo=" + pageNo;
     send(url, keyword, pageNo);
 }
 
@@ -165,7 +165,7 @@ function showList(items, total, keyword) { // 검색결과 1
 function send2(item, keyword, pageNo) { // 특정 키워드 검색시
     $.ajax({
         type: 'get',
-        url: "/tour/list?keyword=" + keyword + "&pageNo=" + pageNo,
+        url: "/tour/keywordList?keyword=" + keyword + "&pageNo=" + pageNo,
         dataType: 'json',
         cache: false
     }).done((data) => {
@@ -254,7 +254,7 @@ function showList2(item, keyword) { // 특정 키워드 검색시 리스트
 function send3(keyword, pageNo) { // 검색 결과 없을시
     $.ajax({
         type: 'get',
-        url: "/tour/list?keyword=" + keyword + "&pageNo=" + pageNo,
+        url: "/tour/keywordList?keyword=" + keyword + "&pageNo=" + pageNo,
         dataType: 'json',
         cache: false
     }).done((data) => {
