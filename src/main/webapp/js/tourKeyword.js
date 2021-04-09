@@ -353,15 +353,41 @@ function showDt(dtItems, imgItems, contentId) { // 디테일
         str += "<h2>" + title + "</h2>";
         str += "<hr>";
 
+        str += '<div id="demo" class="carousel slide" data-ride="carousel">';
+        str += '<ul class="carousel-indicators">';
+
+        $.each(imgItems, (k, img) => {
+            if (k == 0) {
+                str += `<li data-target="#demo" data-slide-to=k class="active"></li>`;
+            } else {
+                str += `<li data-target="#demo" data-slide-to=k></li>`;
+            }
+        })
+        str += "</ul>";
+        str += '<div class="carousel-inner">';
+
         $.each(imgItems, (j, img) => { // 이미지
             let image = img.originimgurl;
 
-            str += "<img src='" + image + "' style='width: 200px;height: 150px'>"
-            // 캐롯셀 적용 해야함
+            if (j == 0) {
+                str += '<div class="carousel-item active">';
+            } else {
+                str += '<div class="carousel-item">';
+            }
+            str += "<img src='" + image + "' style='width: 60%; height: 15%'>";
+            str += "</div>";
         })
 
-        str += "<h4> " + overview + "</h4>";
+        str += "</div>";
+        str += '<a class="carousel-control-prev" href="#demo" data-slide="prev">';
+        str += '<span class="carousel-control-prev-icon"></span>';
+        str += '</a>';
+        str += '<a class="carousel-control-next" href="#demo" data-slide="next">';
+        str += '<span class="carousel-control-next-icon"></span>';
+        str += '</a>';
+        str += '</div>';
 
+        str += "<h4> " + overview + "</h4>";
         str += "<p></p>";
 
         // 카카오 지도 API
@@ -421,21 +447,19 @@ function showDt(dtItems, imgItems, contentId) { // 디테일
         str += "<th> 장르: </th>";
         str += "<td>" + contentTypeId + "</td>";
         str += "</tr>";
+
+        str += "<tr>";
+        str += "<td colspan='5' style='padding-top: 5%'>";
+        str += "<button class='btn btn-primary' onclick='review(" + contentId + ")'>리뷰 보러 가기</button>";
+        str += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += "<button class='btn btn-success' onclick='saveInfo(\"" + contentId + "\",\"" + title +"\")'>여행지 저장</button>";
+        str += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += "<button class='btn btn-info' onclick='rollBack()'>돌아가기</button>";
+        str += "</td>";
+        str += "</tr>";
     })
     str += "</tr>";
     str += "</table>";
-    /*alert(contentId)
-    str += "<form action=" + contextPath + "'/review/list?contentId='" + contentId + " method='get'>"
-    str += ' <input type="text" name="contentId" value="' + contentId + '">'
-    str += "<button class='btn btn-primary'>리뷰 보러 가기</button>";
-    str += "</form>"*/
-
-    str += "<button class='btn btn-primary' onclick='review(" + contentId + ")'>리뷰 보러 가기</button>";
-    //str += "<button class='btn btn-primary'><a href='"+contextPath+"/review/list?contentId="+contentId+"'>리뷰 보러 가기</a></button>";
-    str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-    str += "<button class='btn btn-success' onclick='saveInfo(" + contentId + ")'>여행지 저장</button>";
-    str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-    str += "<button class='btn btn-info' onclick='rollBack()'>돌아가기</button>";
 
     $('#openAPI').html(str)
 }
@@ -560,33 +584,31 @@ function showDt2(dtItems, imgItem, contentId) { // 디테일
         str += "<th> 장르: </th>";
         str += "<td>" + contentTypeId + "</td>";
         str += "</tr>";
+
+        str += "<tr>";
+        str += "<td colspan='5' style='padding-top: 5%'>";
+        str += "<button class='btn btn-primary' onclick='review(" + contentId + ")'>리뷰 보러 가기</button>";
+        str += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += "<button class='btn btn-success' onclick='saveInfo(\"" + contentId + "\",\"" + title +"\")'>여행지 저장</button>";
+        str += "&nbsp;&nbsp;&nbsp;&nbsp;";
+        str += "<button class='btn btn-info' onclick='rollBack()'>돌아가기</button>";
+        str += "</td>";
+        str += "</tr>";
     })
     str += "</tr>";
     str += "</table>";
-
-    /*let tnum = contentId;
-    str += "<form action=" + contextPath + "'/review/list?contentId='" + tnum + ">"
-    str += ' <input type="text" name="tnum" value="' + tnum + '">'
-    str += "<button class='btn btn-primary'>리뷰 보러 가기</button>";
-    str += "</form>"*/
-
-    str += "<button class='btn btn-primary' onclick='review(" + contentId + ")'>리뷰 보러 가기</button>";
-    str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-    str += "<button class='btn btn-success' onclick='saveInfo(" + contentId + ")'>여행지 저장</button>";
-    str += "&nbsp;&nbsp;&nbsp;&nbsp;";
-    str += "<button class='btn btn-info' onclick='rollBack()'>돌아가기</button>";
 
     $('#openAPI').html(str)
 }
 
 function rollBack() {
-    alert(기능구현중);
+    alert("기능구현중");
 }
 
 function review(contentId) {
     location.href = contextPath + '/review/list?contentId=' + contentId;
 }
 
-function saveInfo(contentId) {
-    location.href = '/tour/save?contentId=' + contentId;
+function saveInfo(contentId, title) {
+    location.href = '/tour/save?contentId=' + contentId + "&title=" + encodeURI(title);
 }

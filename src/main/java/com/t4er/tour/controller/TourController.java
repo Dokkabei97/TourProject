@@ -185,7 +185,8 @@ public class TourController {
 
     @GetMapping("/save")
     public String tourSave(Model m, HttpServletRequest req,
-                           @RequestParam String contentId) {
+                           @RequestParam String contentId,
+                           @RequestParam String title) {
         HttpSession ses = req.getSession();
         UserVO user = (UserVO) ses.getAttribute("loginUser");
 
@@ -193,8 +194,10 @@ public class TourController {
 
         log.info("tourSave contentId = " + contentId);
         log.info("tourSave idx = " + idx);
+        log.info("tourSave title = " + title);
 
         m.addAttribute("contentId", contentId);
+        m.addAttribute("title", title);
         m.addAttribute("idx", idx);
 
         return "tour/tourSave";
