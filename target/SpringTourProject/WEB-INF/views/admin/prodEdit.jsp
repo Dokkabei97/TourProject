@@ -27,7 +27,7 @@
 								onchange="selectDCate(this.value)">
 									<option value="">::상위 카테고리::</option>
 									
-								<c:forEach var="upCate" items="${upCategoryList}">
+								<c:forEach var="upCate" items="${uProductCategoryList}">
 								<option 
 								 <c:if test="${item.upCg_code == upCate.upCg_code }">selected</c:if>
 								
