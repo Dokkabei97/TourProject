@@ -2,6 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<style>
+    div.shop {
+        margin: 25px;
+        margin-left: auto;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+    }
+    div.shop:hover {
+        border: 1px solid #777;
+    }
+    div.shop img {
+        width: 100%;
+        height: auto;
+
+    }
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }
+</style>
+
 <c:import url="/top" />
 
 <div class="container">
@@ -38,6 +60,7 @@
         <!-- ----------------------------- -->
     </div>
 
+
     <div class="container" style="margin-top: 30px">
         <div class="row">
             <div class="col-sm-12 text-center">
@@ -52,17 +75,15 @@
 
             <c:if test="${cList ne null and not empty cList }">
                 <c:forEach var="pd" items="${cList}" varStatus="state">
-                    <div class="col-md-3">
+                    <div class="shop">
                         <c:if test="${pd.pimage eq null or empty pd.pimage}">
                             <a href="/point/detail?pnum=${pd.pnum}"> <img
-                                    src="../image/noimage.png" class="rounded img-fluid"
-                                    style="height: 100px" />
+                                    src="../image/noimage.png"  style="width: 177px; height: 160px"/>
                             </a> <br> <br>
                         </c:if>
                         <c:if test="${pd.pimage ne null and not empty pd.pimage }">
                             <a href="/point/detail?pnum=${pd.pnum}"> <img
-                                    src="../product/upload/${pd.pimage}" class="rounded img-fluid"
-                                    style="height: 100px" />
+                                    src="../product/upload/${pd.pimage}"  style="width: 177px; height: 160px"/>
                             </a><br> <br>
                         </c:if>
                         <h6>
@@ -73,7 +94,7 @@
                     </div>
                 </c:forEach>
             </c:if>
-            <div class="container">
+            <div class="container" style="padding-top: 80px;">
                 ${pageNavi}
                 <%-- <td colspan="2"><span class="text-primary">총상품수: <c:out
                             value="${paging.totalCount}" />개
@@ -83,5 +104,6 @@
             </div>
         </div>
     </div>
+</div>
 
 <c:import url="/foot" />

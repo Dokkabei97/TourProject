@@ -24,12 +24,13 @@
                 <th>포인트 적립</th>
                 <th>포인트 사용</th>
                 <th>적립/사용 내역</th>
+                <th>적립/사용 일</th>
                 <th>총 포인트</th>
             </tr>
             <!-- 포인트 적립내역 출력 -->
             <c:if test="${mypoint  eq null or empty mypoint  }">
                 <tr>
-                    <td>적립된 포인트가 없습니다.</td>
+                    <td colspan = "6">적립된 포인트가 없습니다.</td>
                 </tr>
             </c:if>
             <c:if test="${mypoint ne null and not empty mypoint }">
@@ -60,11 +61,14 @@
                             <label>이달의 여행지 선정</label>
                         </c:if></td>
 
+                        <td>${mypoint.pdate }</td>
                         <td>${mypoint.ptotalPoint }</td>
                     </tr>
                 </c:forEach>
             </c:if>
         </table>
+        <div class="container">
+            ${pageNavi}</div>
         <hr style="color:Navy;">
         <div class="text-right">
             <h4 id="font1"> 현재 포인트 : ${mytotalpoint }point</h4>

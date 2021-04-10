@@ -34,10 +34,10 @@
         <ul>
             <li>
                 <input type="text" name="cat1" id="cat1" value="A02"> 문화시설
-                <input type="text" name="cat2" id="ca2" value="A0206"> 문화시설
+                <input type="text" name="cat2" id="cat2" value="A0206"> 문화시설
+                <input type="text" name="pageNo" id="PageNo" value="1">
             </li>
         </ul>
-
 
 
 
