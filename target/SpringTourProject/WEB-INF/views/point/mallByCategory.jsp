@@ -46,15 +46,17 @@
         })
     </script>
     <c:set var="myctx" value="${pageContext.request.contextPath}" />
-    <form id="pageF" name="pageF" action="point#bbs">
+    <form id="pageF" name="pageF" action="">
         <input type="hidden" name="findKeyword" value="${param.findKeyword}">
+
     </form>
 
     <div class="col-sm-9 text-center">
         <!-- 검색폼------------------------------------- -->
-        <form name="findF" id="findF" action="point#bbs" class="form-inline">
+        <form name="findF" id="findF" action="" class="form-inline">
             <input type="text" name="findKeyword" id="findKeyword"
                    placeholder="상품명을 입력하세요" class="form-control m-3" required>
+            <input type="hidden" name="cgnum" value="${cgnum}">
             <button class="btn btn-primary">검 색</button>
         </form>
         <!-- ----------------------------- -->

@@ -40,13 +40,13 @@
         })
     </script>
     <c:set var="myctx" value="${pageContext.request.contextPath}"/>
-    <form id="pageF" name="pageF" action="point#bbs">
+    <form id="pageF" name="pageF" action="">
         <input type="hidden" name="findKeyword" value="${param.findKeyword}">
     </form>
 
     <div class="col-sm-9 text-center">
         <!-- 검색폼------------------------------------- -->
-        <form name="findF" id="findF" action="point#bbs"
+        <form name="findF" id="findF" action=""
               class="form-inline">
             <input type="text" name="findKeyword" id="findKeyword"
                    placeholder="상품명을 입력하세요" class="form-control m-3" required>
@@ -72,12 +72,12 @@
                     <div class="shop">
                         <c:if test="${pd.pimage eq null or empty pd.pimage}">
                             <a href="/point/detail?pnum=${pd.pnum}"> <img
-                                    src="../image/noimage.png" style="width: 177px; height: 160px"/>
+                                    src="../image/noimage.png" style="width: 178px; height: 160px"/>
                             </a> <br> <br>
                         </c:if>
                         <c:if test="${pd.pimage ne null and not empty pd.pimage }">
                             <a href="/point/detail?pnum=${pd.pnum}"> <img
-                                    src="../product/upload/${pd.pimage}" style="width: 177px; height: 160px"/>
+                                    src="../product/upload/${pd.pimage}" style="width: 178px; height: 160px"/>
                             </a> <br> <br>
                         </c:if>
                         <h6><a href="/point/detail?pnum=${pd.pnum}">${pd.pname}</a></h6>

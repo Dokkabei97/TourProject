@@ -23,6 +23,7 @@
     <resources mapping="/review/**" location="/review/"/>
     <resources mapping="/board/**" location="/board/"/>
     <resources mapping="/product/**" location="/product/"/>
+    <resources mapping="/user/**" location="/user/"/>
     <resources mapping="/easterEgg/**" location="/easterEgg/"/>
 
     <!--viewResolver 설정-->
@@ -71,14 +72,14 @@
             <mapping path="/user/myInfo"/>
             <mapping path="/review/write"/>
             <mapping path="/board/insert"/>
-            <mapping path="/admin/**"/>
+            <mapping path="/admin/index"/>
             <mapping path="/tour/save"/>
             <beans:bean class="com.t4er.common.interceptor.LoginCheckInterceptor"/>
         </interceptor>
-<!--        <interceptor>
+       <interceptor>
             <mapping path="/admin/**"/>
-            <beans:bean class="com.my.common.interceptor.AdminCheckInterceptor"/>
-        </interceptor>-->
+            <beans:bean class="com.t4er.common.interceptor.AdminCheckInterceptor"/>
+        </interceptor>
     </interceptors>
 
    <!-- MessageResource ======================= -->

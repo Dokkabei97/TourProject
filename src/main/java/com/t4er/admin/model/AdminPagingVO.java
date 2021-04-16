@@ -68,7 +68,6 @@ public class AdminPagingVO {
             }
         }
 
-
         String qStr = "?pageSize=" + pageSize + "&findType=" + findType + "&findKeyword=" + findKeyword;
         StringBuilder buf = new StringBuilder();
         buf.append("<ul class='pagination justify-content-center'>");
@@ -102,14 +101,3 @@ public class AdminPagingVO {
         return buf.toString();
     }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:import url="/top_sub" />
+<c:import url="/top" />
 
-<c:import url="/admin/adminMenubar"/>
 
 <div class="m-5 p-3 text-center" style="border:1px solid gray; border-radius:15px" id="font2">
 
@@ -60,15 +59,29 @@
             <c:if test="${pList ne null and not empty pList}">
                 <c:forEach var="pd" items="${pList}" varStatus="state">
                     <div class="col-md-3">
-                        <a href="prodDetail?pnum=${pd.pnum}"> <img
-                                src="product_images/${pd.pimage}" class="rounded img-fluid"
-                                style="height: 220px"/>
-                        </a> <br> <br>
+                        <c:if test="${pd.pimage eq null or empty pd.pimage}">
+                            <a href="prodDetail?pnum=${pd.pnum}"> <img
+                                    src="../image/noimage.png" class="rounded img-fluid"
+                                    style="height: 100px"/>
+                            </a> <br> <br>
+                        </c:if>
+                        <c:if test="${pd.pimage ne null and not empty pd.pimage }">
+                            <a href="prodDetail?pnum=${pd.pnum}"> <img
+                                    src="../product/upload/${pd.pimage}" class="rounded img-fluid"
+                                    style="height: 100px"/>
+                            </a> <br> <br>
+                        </c:if>
                         <h6>${pd.pname}</h6>
                             ${pd.price}
-                        <H1 class="badge badge-info">Point</H1>
+                        <h1 class="badge badge-info">Point</h1><br>
+                        <a href="prodEdit?pnum=${pd.pnum}">수정</a> |
+                        <a href="prodDelete?pnum=${pd.pnum}">삭제</a>
                     </div>
                 </c:forEach>
             </c:if>
+
+            <p>${pageNavi}</p>
+
         </div>
     </div>
+<c:import url="/foot" />

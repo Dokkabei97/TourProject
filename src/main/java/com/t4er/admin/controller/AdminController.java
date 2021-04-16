@@ -9,9 +9,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.t4er.admin.model.AdminPagingVO;
-import com.t4er.point.model.ProductPagingVO;
-import com.t4er.point.model.ProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,14 +18,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.t4er.admin.model.AdminPagingVO;
 import com.t4er.admin.service.AdminService;
 import com.t4er.common.CommonUtil;
+import com.t4er.mypage.service.MypageService;
+import com.t4er.point.model.OrderVO;
+import com.t4er.point.model.ProductPagingVO;
+import com.t4er.point.model.ProductVO;
+import com.t4er.point.service.OrderService;
 import com.t4er.point.service.ProductService;
 import com.t4er.user.model.UserVO;
 
 import lombok.extern.log4j.Log4j;
-import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @Log4j
@@ -42,20 +45,24 @@ public class AdminController {
     private ProductService productService;
 
     @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private MypageService mypageService;
+
+    @Autowired
     private CommonUtil util;
 
-    @GetMapping("/index")
+    @GetMapping("/adminMain")
     public String admin() {
 
-        return "/admin/admin";
+        return "admin/admin";
     }
 
     @GetMapping("/userList")
     public String userList(Model m, HttpServletRequest req, @RequestHeader("User-Agent") String userAgent,
                            @ModelAttribute("paging") AdminPagingVO paging) {
-        log.info("paging===" + paging);
         int totalUser = this.adminService.getUserCount(paging);
-        log.info("userConut=" + totalUser);
 
         paging.setTotalCount(totalUser);
         paging.setPagingBlock(5);
@@ -72,58 +79,60 @@ public class AdminController {
         m.addAttribute("userList", userList);
         m.addAttribute("totalCount", totalUser);
         m.addAttribute("pageNavi", pageNavi);
-        return "/admin/userList";
+        return "admin/userList";
     }// ----------------------
 
     @GetMapping("/userEdit")
-    public String adminEdit(Model m, HttpServletRequest req,
-                            @RequestParam int idx) {
+    public String adminEdit(Model m, HttpServletRequest req, @RequestParam Integer idx) {
+        log.info("idx==="+idx);
+        if (idx == null)
+            return "redirect:/mypage";
         HttpSession ses = req.getSession();
         UserVO ac = (UserVO) ses.getAttribute("loginUser");
         int adminCheck = ac.getStat();
 
-        log.info("idx===" + idx);
-        if (idx == 0)
-            return "redirect:/admin";
+        String mypoint = this.adminService.myTotalPoint2(idx);
 
-        UserVO user = this.adminService.getUser(idx);
+        // 정보검색
+        UserVO user = this.adminService.selectMy2(idx);
+        log.info("user = " + user);
+
         m.addAttribute("user", user);
         m.addAttribute("adminCheck", adminCheck);
+        m.addAttribute("mytotalpoint", mypoint);
 
         return "admin/userEdit";
     }
 
     @PostMapping("/userEdit")
-    public String adminEditEnd(Model m, @RequestParam int idx, @ModelAttribute("user") UserVO user) {
-        if (user.getIdx() == 0)
-            return "admin/userList";
+    public String adminEditEnd(Model m,@ModelAttribute("user") UserVO user) {
 
-
+        System.out.println(user);
         int n = this.adminService.updateUser(user);
+
         String str = (n > 0) ? "수정 성공" : "수정 실패";
-        String loc = (n > 0) ? "userList?idx=" + user.getIdx() : "javascript:history.back()";
+        String loc = (n > 0) ? "/admin/userList" : "javascript:history.back()";
         return util.addMsgLoc(m, str, loc);
     }
 
-    @PostMapping("/userDelete")
-    public String adminDel(Model m, @RequestParam
-            int idx) {
-        if (idx == 0) {
+    @GetMapping("/userDelete")
+    public String adminDel(Model m, @RequestParam Integer idx) {
+        log.info("idxdelte==="+idx);
+        if (idx == null) {
             return util.addMsgLoc(m, "문제가 있습니다", "/index");
         }
         int n = this.adminService.deleteUser(idx);
+        System.out.println(n);
         String str = (n > 0) ? "탈퇴 성공" : "탈퇴 실패";
-        String loc = (n > 0) ? "/logout" : "javascript:history.back()";
+        String loc = (n > 0) ? "/admin/userList" : "javascript:history.back()";
 
         return util.addMsgLoc(m, str, loc);
 
     }
 
     @GetMapping("/shopList")
-    public String shopList(Model m, HttpServletRequest req,
-                           @ModelAttribute("cgnum") String cgnum,
-                           @RequestHeader("User-Agent") String userAgent,
-                           @ModelAttribute("paging") ProductPagingVO paging) {
+    public String shopList(Model m, HttpServletRequest req, @ModelAttribute("cgnum") String cgnum,
+                           @RequestHeader("User-Agent") String userAgent, @ModelAttribute("paging") ProductPagingVO paging) {
 
         // 총 상품 수 가져오기
         int totalCount = this.productService.getProductTotalCount(paging);
@@ -135,7 +144,7 @@ public class AdminController {
         // 상품 목록 가져오기
         List<ProductVO> pList = this.productService.getProdList(paging);
         String myctx = req.getContextPath();
-        String loc = "admin/shopList";
+        String loc = "point";
         String pageNavi = paging.getPageNavi(myctx, loc, userAgent, cgnum);
 
         m.addAttribute("cgnum", cgnum);
@@ -152,12 +161,9 @@ public class AdminController {
     }
 
     @PostMapping("/prodInsert")
-    public String prodInsertEnd(Model m, HttpServletRequest req,
-                                @RequestParam("imgfile1")MultipartFile imgfile1,
-                                @RequestParam("imgfile2")MultipartFile imgfile2,
-                                @RequestParam("imgfile3")MultipartFile imgfile3,
+    public String prodInsertEnd(Model m, HttpServletRequest req, @RequestParam("imgfile1") MultipartFile imgfile1,
+                                @RequestParam("imgfile2") MultipartFile imgfile2, @RequestParam("imgfile3") MultipartFile imgfile3,
                                 @ModelAttribute("product") ProductVO product) {
-
 
         ServletContext app = req.getServletContext();
         String prodDir = app.getRealPath("/product/upload");
@@ -187,7 +193,7 @@ public class AdminController {
                 filename2 = uuid.toString() + "-" + oriname2;
                 product.setPimage2(filename2);
             }
-            if(!oriname3.isEmpty()) {
+            if (!oriname3.isEmpty()) {
                 filename3 = uuid.toString() + "-" + oriname3;
                 product.setPimage3(filename3);
             }
@@ -207,10 +213,10 @@ public class AdminController {
             }
         }
 
-         int n = adminService.insertProd(product);
+        int n = adminService.insertProd(product);
 
         String str = (n > 0) ? "등록 성공" : "등록 실패";
-        String loc = "/shoplist";
+        String loc = "/admin/shoplist";
 
         m.addAttribute("msg", str);
         m.addAttribute("loc", loc);
@@ -219,10 +225,7 @@ public class AdminController {
     }
 
     @GetMapping("/prodEdit")
-    public String prodEdit(Model m, HttpServletRequest req,
-                           @RequestParam int pnum) {
-        HttpSession ses = req.getSession();
-
+    public String prodEdit(Model m, HttpServletRequest req, @RequestParam int pnum) {
         log.info("pnum===" + pnum);
         if (pnum == 0)
             return "redirect:/admin";
@@ -235,7 +238,7 @@ public class AdminController {
 
     @PostMapping("/prodEdit")
     public String prodEditEnd(Model m, @RequestParam String pnum, @ModelAttribute("product") ProductVO product) {
-        if (product.getPnum()==null)
+        if (product.getPnum() == null)
             return "admin/shopList";
 
         int n = this.adminService.updateProd(product);
@@ -243,6 +246,32 @@ public class AdminController {
         String loc = (n > 0) ? "prodEdit?idx=" + product.getPnum() : "javascript:history.back()";
         return util.addMsgLoc(m, str, loc);
     }
+
+    @GetMapping("/orderList")
+    public String orderList(Model m, HttpServletRequest req, @RequestHeader("User-Agent") String userAgent,
+                            @ModelAttribute("paging") AdminPagingVO paging) {
+        log.info("paging===" + paging);
+        int totalUser = this.adminService.getUserCount(paging);
+        log.info("userConut=" + totalUser);
+
+        paging.setTotalCount(totalUser);
+        paging.setPageSize(5);
+        paging.setPagingBlock(5);
+        paging.init(req.getSession());
+
+        List<OrderVO> orderList = adminService.listOrder(paging);
+
+        String myctx = req.getContextPath();
+
+        String loc = "admin/orderList";
+        // 페이지 네비 문자열 받아오기
+        String pageNavi = paging.getPageNavi(myctx, loc, userAgent);
+
+        m.addAttribute("orderList", orderList);
+        m.addAttribute("totalCount", totalUser);
+        m.addAttribute("pageNavi", pageNavi);
+        return "/admin/orderList";
+    }// ----------------------
 
     @RequestMapping("/adminMenubar")
     public void adminMenubar() {

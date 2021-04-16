@@ -42,4 +42,8 @@ public interface BoardService {
 
     int updateSunbun(BoardVO parent);// [답변형]
 
+
+    //포인트 부여
+    int writePoint(Integer idx);
+
 }

@@ -59,6 +59,7 @@ public class UserController {
 
         if (n > 0) {
             ses.setAttribute("authUser", user);
+            this.userService.firstPoint(user.getId());
         }
 
         String str = (n > 0) ? "회원가입 완료" : "회원가입 실패";
