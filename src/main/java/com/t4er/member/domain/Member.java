@@ -11,11 +11,11 @@ public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    private String userId;
-    private String pwd;
-    private String nick;
-    private String email;
+    private String userId; // 아이디
+    private String pwd; // 비밀번호
+    private String nick; // 닉네임
+    private String email; // 이메일
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role; // 권한
 
 }
