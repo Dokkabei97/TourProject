@@ -1,5 +1,6 @@
 package com.t4er.post.domain;
 
+import com.t4er.common.entity.BaseEntity;
 import com.t4er.member.domain.Member;
 import lombok.Getter;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class Post {
+public class Post extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "post_id")

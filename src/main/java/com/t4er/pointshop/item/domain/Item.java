@@ -1,5 +1,6 @@
 package com.t4er.pointshop.item.domain;
 
+import com.t4er.common.entity.BaseEntity;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class Item {
+public class Item extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name = "item_id")
