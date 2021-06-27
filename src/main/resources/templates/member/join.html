@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Title</title>
-    <link th:href="@{/css/bootstrap.min.css}"
+  <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -25,13 +25,13 @@
                 <input type="text" th:field="*{userId}" placeholder="User ID" class="form-control">
                 <br>
 
-                <label th:for="pwd" class="sr-only">비밀번호</label>
+                <label th:for="password" class="sr-only">비밀번호</label>
                 <input type="password" th:field="*{password}" placeholder="Password" class="form-control">
                 <br>
 
                 <label th:for="email" class="sr-only">이메일</label>
                 <input type="text" th:field="*{email}" placeholder="Email" class="form-control">
-                <input type="hidden" th:field="*{role}" th:value="USER">
+                <input type="text" th:field="*{role}" th:value="USER">
 
                 <div>
                     <button type="submit" class="btn btn-success">회원가입</button>

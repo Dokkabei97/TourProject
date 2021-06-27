@@ -2,6 +2,8 @@ package com.t4er.domain.member;
 
 import com.t4er.domain.BaseEntity;
 import com.t4er.domain.post.Post;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,6 +34,7 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Post> post = new ArrayList<>();
 
+    @Builder
     public Member(String userId, String password, String nick, String email, Role role) {
         this.userId = userId;
         this.password = password;
@@ -43,5 +46,4 @@ public class Member extends BaseEntity {
     public Member(Role role) {
         this.role = role;
     }
-
 }

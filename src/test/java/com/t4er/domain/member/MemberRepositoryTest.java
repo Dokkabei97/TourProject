@@ -25,7 +25,7 @@ class MemberRepositoryTest {
 
         // then
         assertThat(member.getUserId()).isEqualTo("testAccount1");
-        assertThat(member.getPwd()).isEqualTo("test123");
+        assertThat(member.getPassword()).isEqualTo("test123");
         assertThat(member.getNick()).isEqualTo("test");
         assertThat(member.getEmail()).isEqualTo("test@test.com");
 
