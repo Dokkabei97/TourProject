@@ -1,7 +1,7 @@
 package com.t4er.service.member;
 
 import com.t4er.domain.member.MemberRepository;
-import com.t4er.web.member.dto.MemberJoinDto;
+import com.t4er.dto.member.MemberJoinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

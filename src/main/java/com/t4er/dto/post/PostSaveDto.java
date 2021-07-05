@@ -1,4 +1,4 @@
-package com.t4er.web.post.dto;
+package com.t4er.dto.post;
 
 import com.t4er.domain.post.Post;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.t4er.web.post;
+package com.t4er.controller.post;
 
 import com.t4er.domain.post.Post;
 import com.t4er.service.post.PostService;
-import com.t4er.web.post.dto.PostSaveDto;
+import com.t4er.dto.post.PostSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

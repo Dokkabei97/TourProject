@@ -1,9 +1,9 @@
-package com.t4er.web.member;
+package com.t4er.controller.member;
 
 import com.t4er.domain.member.Member;
 import com.t4er.domain.member.Role;
 import com.t4er.service.member.MemberService;
-import com.t4er.web.member.dto.MemberJoinDto;
+import com.t4er.dto.member.MemberJoinDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

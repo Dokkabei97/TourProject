@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html th:replace="~{/layout/layoutFile :: layout(~{::title}, ~{::section})}" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>올랑올랑</title>
 </head>
 <body>
-리뉴얼 프로젝트
-<a href="/members/join">회원 가입</a>
-<a href="/login">로그인</a>
-<a href="/logout">로그아웃</a>
+<section>
+    <img style="width:100%" th:src="@{/image/main.png}" src="../static/image/main.png">
+</section>
 </body>
 </html>

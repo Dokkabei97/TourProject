@@ -1,4 +1,4 @@
-package com.t4er.web.member.dto;
+package com.t4er.dto.member;
 
 import com.t4er.domain.member.Member;
 import com.t4er.domain.member.Role;

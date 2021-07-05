@@ -1,4 +1,4 @@
-package com.t4er.web.shop.item;
+package com.t4er.controller.shop.item;
 
 import com.t4er.domain.shop.item.ItemRepository;
 import lombok.RequiredArgsConstructor;

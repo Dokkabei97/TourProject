@@ -1,9 +1,9 @@
-package com.t4er.web.login;
+package com.t4er.controller.login;
 
 import com.t4er.domain.member.Member;
 import com.t4er.service.login.LoginService;
 import com.t4er.session.SessionConst;
-import com.t4er.web.login.dto.LoginForm;
+import com.t4er.dto.login.LoginFormDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,12 +23,12 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
+    public String loginForm(@ModelAttribute("loginForm") LoginFormDto form) {
         return "login/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult,
+    public String login(@Validated @ModelAttribute LoginFormDto form, BindingResult bindingResult,
                         @RequestParam(defaultValue = "/") String redirectURL,
                         HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
