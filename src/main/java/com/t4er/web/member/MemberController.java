@@ -1,7 +1,6 @@
 package com.t4er.web.member;
 
 import com.t4er.domain.member.Member;
-import com.t4er.domain.member.MemberRepository;
 import com.t4er.domain.member.Role;
 import com.t4er.service.member.MemberService;
 import com.t4er.web.member.dto.MemberJoinDto;
@@ -27,12 +26,7 @@ public class MemberController {
 
     @PostMapping("/join")
     public String joined(@ModelAttribute("member")MemberJoinDto member) {
-        log.info("member.getUserId={}", member.getUserId());
-        log.info("member.getPassword={}", member.getPassword());
-        log.info("member.getNick={}", member.getNick());
-        log.info("member.getEmail={}", member.getEmail());
         memberService.join(member);
-//        memberRepository.save(member);
         return "redirect:/";
     }
 }

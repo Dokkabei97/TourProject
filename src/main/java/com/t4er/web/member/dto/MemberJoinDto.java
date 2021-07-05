@@ -2,11 +2,9 @@ package com.t4er.web.member.dto;
 
 import com.t4er.domain.member.Member;
 import com.t4er.domain.member.Role;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter @Setter
 @NoArgsConstructor
 public class MemberJoinDto {
 

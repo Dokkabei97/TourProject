@@ -1,4 +1,4 @@
-package com.t4er.domain.order;
+package com.t4er.domain.shop.order;
 
 import com.t4er.domain.BaseEntity;
 import lombok.Getter;

@@ -1,8 +1,14 @@
 package com.t4er.web.post;
 
-import com.t4er.domain.post.PostRepository;
+import com.t4er.domain.post.Post;
+import com.t4er.service.post.PostService;
+import com.t4er.web.post.dto.PostSaveDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -10,5 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/posts")
 public class PostController {
 
-    private final PostRepository postRepository;
+    private final PostService postService;
+
+    @GetMapping("/list")
+    public String postList(Model model) {
+        return "post/list";
+    }
+
+    @GetMapping("/write")
+    public String writePost(Model model) {
+        model.addAttribute("post", new Post());
+        return "post/write";
+    }
+
+    @PostMapping("/write")
+    public String savePost(@ModelAttribute("post") PostSaveDto saveDto) {
+        postService.save(saveDto);
+        return "redirect:/post/list";
+    }
+
 }

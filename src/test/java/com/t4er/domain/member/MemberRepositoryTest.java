@@ -1,5 +1,7 @@
 package com.t4er.domain.member;
 
+import com.t4er.service.member.MemberService;
+import com.t4er.web.member.dto.MemberJoinDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +16,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
+    @Autowired MemberService memberService;
 
     @Test
     void join() throws Exception {
         // given
         Member member = new Member("testAccount1", "test123", "test", "test@test.com", Role.USER);
-
         // when
-        memberRepository.save(member);
+        Member saveMember = memberRepository.save(member);
 
         // then
-        assertThat(member.getUserId()).isEqualTo("testAccount1");
-        assertThat(member.getPassword()).isEqualTo("test123");
-        assertThat(member.getNick()).isEqualTo("test");
-        assertThat(member.getEmail()).isEqualTo("test@test.com");
+        assertThat(saveMember.getUserId()).isEqualTo("testAccount1");
 
         // 실패 검증 코드 추가해야함
     }

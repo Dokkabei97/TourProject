@@ -1,4 +1,4 @@
-package com.t4er.web.order;
+package com.t4er.web.shop.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -3,7 +3,6 @@ package com.t4er.domain.member;
 import com.t4er.domain.BaseEntity;
 import com.t4er.domain.post.Post;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

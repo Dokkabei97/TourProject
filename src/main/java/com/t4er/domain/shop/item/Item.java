@@ -1,7 +1,6 @@
-package com.t4er.domain.item;
+package com.t4er.domain.shop.item;
 
 import com.t4er.domain.BaseEntity;
-import com.t4er.domain.order.Order;
 import lombok.Getter;
 
 import javax.persistence.Column;
