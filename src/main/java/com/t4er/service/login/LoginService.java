@@ -4,9 +4,11 @@ import com.t4er.domain.member.Member;
 import com.t4er.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Service
 public class LoginService {
 
     private final MemberRepository memberRepository;

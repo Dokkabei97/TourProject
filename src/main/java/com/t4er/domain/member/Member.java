@@ -18,7 +18,7 @@ public class Member extends BaseEntity {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    @Column(length = 20, nullable = false)
+    @Column(length = 20, nullable = false, unique = true)
     private String userId; // 아이디
     @Column(length = 100, nullable = false)
     private String password; // 비밀번호
