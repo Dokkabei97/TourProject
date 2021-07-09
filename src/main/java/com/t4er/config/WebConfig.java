@@ -1,8 +1,8 @@
 package com.t4er.config;
 
 import com.t4er.config.login.LoginArgumentResolver;
-import com.t4er.interceptor.AdminInterceptor;
-import com.t4er.interceptor.LoginInterceptor;
+import com.t4er.config.interceptor.AdminInterceptor;
+import com.t4er.config.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

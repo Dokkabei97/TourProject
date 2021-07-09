@@ -1,4 +1,4 @@
-package com.t4er.interceptor;
+package com.t4er.config.interceptor;
 
 import com.t4er.domain.member.Role;
 import com.t4er.dto.admin.AdminCheckDto;
