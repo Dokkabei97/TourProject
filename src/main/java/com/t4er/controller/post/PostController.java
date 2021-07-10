@@ -6,6 +6,7 @@ import com.t4er.service.post.PostService;
 import com.t4er.dto.post.PostSaveDto;
 import com.t4er.session.SessionConst;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/posts")
@@ -34,8 +36,8 @@ public class PostController {
         Member saveDto = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Long memberId = saveDto.getId();
 
-        model.addAttribute("memberId", memberId);
         model.addAttribute("post", new PostSaveDto());
+        model.addAttribute("memberId", memberId);
         return "post/write";
     }
 

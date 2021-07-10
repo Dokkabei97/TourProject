@@ -5,6 +5,7 @@ import com.t4er.domain.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,10 +29,22 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    public static Post postWrite(Member member) {
+        Post post = new Post();
+        post.title = post.getTitle();
+        post.content = post.getContent();
+        post.member = member;
+        post.date = LocalDateTime.now();
+        post.inquiry = 0L;
+        return post;
+    }
+
     @Builder
-    public Post(String title, String content, Member member) {
+    public Post(String title, String content, LocalDateTime date, Long inquiry, Member member) {
         this.title = title;
         this.content = content;
+        this.date = date;
+        this.inquiry = inquiry;
         this.member = member;
     }
 }

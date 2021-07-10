@@ -1,5 +1,6 @@
 package com.t4er.service.post;
 
+import com.t4er.domain.member.Member;
 import com.t4er.domain.post.PostRepository;
 import com.t4er.dto.post.PostSaveDto;
 import lombok.RequiredArgsConstructor;

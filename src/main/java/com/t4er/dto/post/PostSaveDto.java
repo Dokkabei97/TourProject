@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter @Setter
 @NoArgsConstructor
 public class PostSaveDto {
@@ -13,18 +15,16 @@ public class PostSaveDto {
     private String title;
     private String content;
     private Member member;
-
-    public PostSaveDto(String title, String content, Member member) {
-        this.title = title;
-        this.content = content;
-        this.member = member;
-    }
+    private LocalDateTime date;
+    private Long inquiry;
 
     public Post toEntity() {
         return Post.builder()
                 .title(title)
                 .content(content)
                 .member(member)
+                .date(LocalDateTime.now())
+                .inquiry(0L)
                 .build();
     }
 }
