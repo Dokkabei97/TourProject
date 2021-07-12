@@ -20,7 +20,6 @@ public class LoginArgumentResolver implements HandlerMethodArgumentResolver {
         boolean hasMemberType = Member.class.isAssignableFrom(parameter.getParameterType());
 
         return hasLoginAnnotation && hasMemberType;
-
     }
 
     @Override

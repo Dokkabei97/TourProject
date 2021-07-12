@@ -42,6 +42,10 @@ public class Member extends BaseEntity {
         this.role = role;
     }
 
+    public Member(Long id) {
+        this.id = id;
+    }
+
     public Member(Role role) {
         this.role = role;
     }

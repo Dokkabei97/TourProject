@@ -43,6 +43,9 @@ public class PostController {
 
     @PostMapping("/write")
     public String savePost(@ModelAttribute("post") PostSaveDto saveDto) {
+        log.info("title = {}", saveDto.getTitle());
+        log.info("content = {}", saveDto.getContent());
+        log.info("memberId = {}", saveDto.getMember());
         postService.save(saveDto);
         return "redirect:/posts/list";
     }

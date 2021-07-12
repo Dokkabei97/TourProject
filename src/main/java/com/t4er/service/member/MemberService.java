@@ -14,7 +14,9 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public Long join (MemberJoinDto joinDto) {
-        return memberRepository.save(joinDto.toEntity()).getId();
+    public Long join(MemberJoinDto joinDto) {
+
+        return memberRepository.findByUserId(joinDto.getUserId())
+                .orElseGet(() -> memberRepository.save(joinDto.toEntity())).getId();
     }
 }
