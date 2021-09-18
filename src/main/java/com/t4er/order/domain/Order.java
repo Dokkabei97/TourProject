@@ -16,7 +16,8 @@ public class Order extends AbstractEntity {
 
     private static final String ORDER_PREFIX = "ord_";
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String orderToken;

@@ -21,12 +21,12 @@ public class Member extends AbstractEntity {
     private Long id;
 
     private String email;
-
+    private boolean verifyEmail;
     private String password;
 
     private String nick;
-
     private String profileImage;
+
 
     @Builder
     public Member(String email, String password, String nick, String profileImage) {
@@ -34,10 +34,19 @@ public class Member extends AbstractEntity {
         this.password = password;
         this.nick = nick;
         this.profileImage = profileImage;
+        this.verifyEmail = false;
+    }
+
+    public void updateMemberPassword(String password) {
+        this.password = password;
     }
 
     public void updateMemberProfile(String nick, String profileImage) {
         this.nick = nick;
         this.profileImage = profileImage;
+    }
+
+    public void verifyEmail() {
+
     }
 }
