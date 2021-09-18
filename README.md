@@ -4,16 +4,16 @@ Spring Legacy Project -> Spring Boot Project
 
 MyBatis -> Spring Data JPA
 
-JSP -> Thymeleaf
+OracleDB -> H2DB
+
+Delete Front
 
 ==== 4.0 ====
 
-add React + Vue
+add React 
 
-add Spring Security
+H2DB -> MySql || MariaDB
 
 ==== 5.0 ====
 
-add Travis CI
-
-release AWS
+add CI/CD
