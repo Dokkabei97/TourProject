@@ -1,19 +1,15 @@
 ==== 3.0 ====
 
-Spring Legacy Project -> Spring Boot Project
+[Change] Spring Legacy Project -> Spring Boot Project
 
-MyBatis -> Spring Data JPA
+[Change] MyBatis -> Spring Data JPA
 
-OracleDB -> H2DB
+[Change] OracleDB -> H2DB
 
-Delete Front
+[Delete] FrontView
 
 ==== 4.0 ====
 
-add React 
+[Add] React 
 
-H2DB -> MySql || MariaDB
-
-==== 5.0 ====
-
-add CI/CD
+[Change] H2DB -> MySQL or MariaDB
