@@ -22,12 +22,7 @@ public class MemberService {
         memberRepository.findByEmail(email)
                 .orElseThrow(AlreadyRegisterEmailException::new);
 
-        Member member = Member.builder()
-                .email(email)
-                .password(password)
-                .build();
-
-        memberRepository.save(member);
+        memberRepository.save(new Member(email, password));
     }
 
     @Transactional
@@ -52,5 +47,10 @@ public class MemberService {
                 .orElseThrow(AlreadyUseNickException::new);
 
         member.updateMemberProfile(nick, profileImage);
+    }
+
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(NotFoundEmailException::new);
     }
 }
