@@ -18,11 +18,12 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void registerMember(String email, String password) {
-        memberRepository.findByEmail(email)
-                .orElseThrow(AlreadyRegisterEmailException::new);
+    public Member registerMember(String email, String password) {
+        if (memberRepository.countByEmail(email) != 0) {
+            throw new AlreadyRegisterEmailException();
+        }
 
-        memberRepository.save(new Member(email, password));
+        return memberRepository.save(new Member(email, password));
     }
 
     @Transactional
