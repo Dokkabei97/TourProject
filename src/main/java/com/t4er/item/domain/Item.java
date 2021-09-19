@@ -3,6 +3,7 @@ package com.t4er.item.domain;
 import com.t4er.common.entity.AbstractEntity;
 import com.t4er.common.exception.InvalidParamException;
 import com.t4er.common.util.TokenGenerator;
+import com.t4er.item.domain.option.ItemOption;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,6 +23,10 @@ public class Item extends AbstractEntity {
     private String itemToken;
     private String itemName;
     private Long itemPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_options_id")
+    private ItemOption itemOption;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -55,7 +60,4 @@ public class Item extends AbstractEntity {
         this.status = Status.END_OF_SALE;
     }
 
-    public boolean availableSales() {
-        return this.status == Status.ON_SALE;
-    }
 }
