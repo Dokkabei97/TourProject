@@ -42,7 +42,7 @@ public class Item extends AbstractEntity {
     }
 
     @Builder
-    public Item(String itemName, Long itemPrice) {
+    public Item(String itemName, Long itemPrice, ItemOption itemOption) {
         if (StringUtils.isBlank(itemName)) throw new InvalidParamException("Item.itemName");
         if (itemPrice == null) throw new InvalidParamException("Item.itemPrice");
 
@@ -50,6 +50,7 @@ public class Item extends AbstractEntity {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.status = Status.PREPARE;
+        this.itemOption = itemOption;
     }
 
     public void changeOnSale() {

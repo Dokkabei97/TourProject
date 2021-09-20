@@ -12,4 +12,7 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     Optional<Item> findByItemName(String itemName);
 
     Optional<Item> findByItemToken(String itemToken);
+
+    Long countByItemName(String itemName);
+
 }

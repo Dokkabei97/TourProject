@@ -16,10 +16,9 @@ public class ItemService {
 
     @Transactional
     public void registerItem(String itemName, Long itemPrice) {
-        itemRepository.findByItemName(itemName)
-                .orElseThrow(); // TODO: 2021-09-19  Exception 추가
+        // TODO: 2021-09-19 수정 필요 
 
-        itemRepository.save(new Item(itemName, itemPrice));
+        // itemRepository.save(new Item(itemName, itemPrice));
     }
 
     @Transactional
