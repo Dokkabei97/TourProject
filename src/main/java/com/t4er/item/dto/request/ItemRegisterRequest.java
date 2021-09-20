@@ -12,21 +12,23 @@ import lombok.ToString;
 @ToString
 public class ItemRegisterRequest {
 
+    // TODO: 2021-09-21 valid 추가
     private String itemName;
     private Long itemPrice;
-//    private ItemOption itemOption;
+    private ItemOption itemOption;
 
     @Builder
-    public ItemRegisterRequest(String itemName, Long itemPrice) {
+    public ItemRegisterRequest(String itemName, Long itemPrice, ItemOption itemOption) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.itemOption = itemOption;
     }
 
     public Item toEntity() {
         return Item.builder()
                 .itemName(itemName)
                 .itemPrice(itemPrice)
-//                .itemOption(itemOption)
+                .itemOption(itemOption)
                 .build();
     }
 }

@@ -29,14 +29,27 @@ public class Item extends AbstractEntity {
     private ItemOption itemOption;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private SaleStatus saleStatus;
+
+    @Enumerated(EnumType.STRING)
+    private ItemStatus itemStatus;
 
     @Getter
     @RequiredArgsConstructor
-    public enum Status {
+    public enum SaleStatus {
         PREPARE("판매준비중"),
         ON_SALE("판매중"),
         END_OF_SALE("판매종료");
+
+        private final String description;
+    }
+
+    @Getter
+    @RequiredArgsConstructor
+    public enum ItemStatus {
+        NEW("신상"),
+        HOT("인기"),
+        SALE("세일");
 
         private final String description;
     }
@@ -49,16 +62,25 @@ public class Item extends AbstractEntity {
         this.itemToken = TokenGenerator.randomCharacterWithPrefix(ITEM_PREFIX);
         this.itemName = itemName;
         this.itemPrice = itemPrice;
-        this.status = Status.PREPARE;
+        this.saleStatus = SaleStatus.PREPARE;
+        this.itemStatus = ItemStatus.NEW;
         this.itemOption = itemOption;
     }
 
     public void changeOnSale() {
-        this.status = Status.ON_SALE;
+        this.saleStatus = SaleStatus.ON_SALE;
     }
 
     public void changeEndOfSale() {
-        this.status = Status.END_OF_SALE;
+        this.saleStatus = SaleStatus.END_OF_SALE;
+    }
+
+    public void changeItemHot() {
+        this.itemStatus = ItemStatus.HOT;
+    }
+
+    public void changeItemSale() {
+        this.itemStatus = ItemStatus.SALE;
     }
 
 }
