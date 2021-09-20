@@ -1,6 +1,8 @@
 package com.t4er.item.application;
 
 import com.t4er.item.domain.Item;
+import com.t4er.item.dto.request.ItemRegisterRequest;
+import com.t4er.item.exception.AlreadyRegisterItemException;
 import com.t4er.item.exception.NotFoundItemTokenException;
 import com.t4er.item.infrastructure.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +17,12 @@ public class ItemService {
     private final ItemRepository itemRepository;
 
     @Transactional
-    public void registerItem(String itemName, Long itemPrice) {
-        // TODO: 2021-09-19 수정 필요 
+    public Item registerItem(ItemRegisterRequest itemDto) {
+        if (itemRepository.countByItemName(itemDto.getItemName()) != 0) {
+            throw new AlreadyRegisterItemException();
+        }
 
-        // itemRepository.save(new Item(itemName, itemPrice));
+        return itemRepository.save(itemDto.toEntity());
     }
 
     @Transactional
