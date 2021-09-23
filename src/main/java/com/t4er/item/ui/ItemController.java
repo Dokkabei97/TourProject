@@ -47,6 +47,13 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
+    @PatchMapping("/change-end-sale")
+    public ResponseEntity<Void> changeEndSale(@RequestBody ItemChangeStatusRequest request) {
+        String itemToken = request.getItemToken();
+        itemService.changeEndOfSale(itemToken);
+        return ResponseEntity.ok().build();
+    }
+
     @PatchMapping("/change-item-discount/{discountPrice}")
     public ResponseEntity<Void> changeItemDiscount(@RequestBody ItemChangeStatusRequest request,
                                                    @PathVariable Long discountPrice) {
@@ -55,5 +62,19 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-    // TODO: 2021-09-23 changeEndSale, changeItemHot, deleteItem
+    @PatchMapping("/change-item-hot")
+    public ResponseEntity<Void> changeItemHot(@RequestBody ItemChangeStatusRequest request) {
+        String itemToken = request.getItemToken();
+        itemService.changeItemHot(itemToken);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/delete-item")
+    public ResponseEntity<Void> deleteItem(@RequestBody ItemChangeStatusRequest request) {
+        String itemToken = request.getItemToken();
+        itemService.deleteItem(itemToken);
+        return ResponseEntity.ok().build();
+    }
+
+    // TODO: 2021-09-23 조회
 }

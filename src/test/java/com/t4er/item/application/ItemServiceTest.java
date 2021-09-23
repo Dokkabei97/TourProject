@@ -5,6 +5,7 @@ import com.t4er.item.domain.option.ItemOption;
 import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.dto.request.ItemRegisterRequest;
 import com.t4er.item.infrastructure.ItemRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static com.t4er.item.domain.Item.ItemStatus.*;
 import static com.t4er.item.domain.Item.SaleStatus.*;
 import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.BDDAssertions.then;
 
 @SpringBootTest
 @Transactional
@@ -22,43 +24,40 @@ class ItemServiceTest {
     ItemService itemService;
     @Autowired
     ItemOptionService itemOptionService;
+    @Autowired
+    ItemRepository itemRepository;
+
+    private Item itemEx() {
+        ItemOptionCreateRequest option = new ItemOptionCreateRequest("테스트옵션");
+        itemOptionService.createItemOption(option);
+
+        ItemRegisterRequest dto = ItemRegisterRequest.builder()
+                .itemName("테스트")
+                .itemPrice(7650L)
+                .optionName(option.toEntity())
+                .build();
+        return itemService.registerItem(dto, option.getOptionName());
+    }
 
     @Test
     void 아이템_추가() throws Exception {
         // given
-        ItemOptionCreateRequest option = new ItemOptionCreateRequest("FOOD");
-        itemOptionService.createItemOption(option);
-
-        // when
-        ItemRegisterRequest dto = ItemRegisterRequest.builder()
-                .itemName("치킨")
-                .itemPrice(7650L)
-                .optionName(option.toEntity())
-                .build();
-        Item item = itemService.registerItem(dto, option.getOptionName());
+        Item item = itemEx();
 
         // then
         assertThat(item.getId()).isNotNull();
-        assertThat(item.getItemName()).isEqualTo("치킨");
+        assertThat(item.getItemName()).isEqualTo("테스트");
         assertThat(item.getItemPrice()).isEqualTo(7650);
         assertThat(item.getItemToken()).startsWith("itm_");
         assertThat(item.getSaleStatus()).isEqualTo(PREPARE);
         assertThat(item.getItemStatus()).isEqualTo(NEW);
-        assertThat(item.getItemOption().getOptionName()).isEqualTo("FOOD");
+        assertThat(item.getItemOption().getOptionName()).isEqualTo("테스트옵션");
     }
 
     @Test
     void 아이템_판매중_전환() throws Exception {
         // given
-        ItemOptionCreateRequest option = new ItemOptionCreateRequest("FOOD");
-        itemOptionService.createItemOption(option);
-
-        ItemRegisterRequest dto = ItemRegisterRequest.builder()
-                .itemName("치킨")
-                .itemPrice(7650L)
-                .optionName(option.toEntity())
-                .build();
-        Item item = itemService.registerItem(dto, option.getOptionName());
+        Item item = itemEx();
 
         // when
         item.changeOnSale();
@@ -70,15 +69,7 @@ class ItemServiceTest {
     @Test
     void 아이템_인기_전환() throws Exception {
         // given
-        ItemOptionCreateRequest option = new ItemOptionCreateRequest("FOOD");
-        itemOptionService.createItemOption(option);
-
-        ItemRegisterRequest dto = ItemRegisterRequest.builder()
-                .itemName("치킨")
-                .itemPrice(7650L)
-                .optionName(option.toEntity())
-                .build();
-        Item item = itemService.registerItem(dto, option.getOptionName());
+        Item item = itemEx();
 
         // when
         item.changeItemHot();
@@ -90,21 +81,23 @@ class ItemServiceTest {
     @Test
     void 아이템_세일() throws Exception {
         // given
-        ItemOptionCreateRequest option = new ItemOptionCreateRequest("FOOD");
-        itemOptionService.createItemOption(option);
-
-        ItemRegisterRequest dto = ItemRegisterRequest.builder()
-                .itemName("치킨")
-                .itemPrice(7650L)
-                .optionName(option.toEntity())
-                .build();
-        Item item = itemService.registerItem(dto, option.getOptionName());
+        Item item = itemEx();
 
         // when
         item.changeItemDiscount(1500L);
 
         // then
         assertThat(item.getItemPrice()).isEqualTo(6150L);
+    }
+
+    @Test
+    void 아이템_삭제() throws Exception {
+        // given
+        Item item = itemEx();
+        // when
+        itemService.deleteItem(item.getItemToken());
+        // then
+        assertThat(itemRepository.count()).isEqualTo(3);
     }
 
 }

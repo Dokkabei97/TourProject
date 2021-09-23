@@ -58,16 +58,16 @@ public class ItemService {
         item.changeItemDiscount(itemPrice);
     }
 
-    private Item itemToken(String itemToken) {
-        return itemRepository.findByItemToken(itemToken)
-                .orElseThrow(NotFoundItemTokenException::new);
-    }
-
     @Transactional
     public void deleteItem(String itemToken) {
         var item = itemToken(itemToken);
 
         itemRepository.delete(item);
+    }
+
+    private Item itemToken(String itemToken) {
+        return itemRepository.findByItemToken(itemToken)
+                .orElseThrow(NotFoundItemTokenException::new);
     }
 
     // TODO: 2021-09-23 조회 추가
