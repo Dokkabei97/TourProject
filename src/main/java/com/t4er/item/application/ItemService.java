@@ -1,10 +1,14 @@
 package com.t4er.item.application;
 
 import com.t4er.item.domain.Item;
+import com.t4er.item.domain.option.ItemOption;
+import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.dto.request.ItemRegisterRequest;
 import com.t4er.item.exception.AlreadyRegisterItemException;
+import com.t4er.item.exception.NotFoundItemOptionException;
 import com.t4er.item.exception.NotFoundItemTokenException;
 import com.t4er.item.infrastructure.ItemRepository;
+import com.t4er.item.infrastructure.option.ItemOptionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +19,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class ItemService {
 
     private final ItemRepository itemRepository;
+    private final ItemOptionRepository itemOptionRepository;
 
     @Transactional
-    public Item registerItem(ItemRegisterRequest itemDto) {
+    public Item registerItem(ItemRegisterRequest itemDto, String optionName) {
         if (itemRepository.countByItemName(itemDto.getItemName()) != 0) {
             throw new AlreadyRegisterItemException();
         }
+        ItemOption itemOption = itemOptionRepository.findByOptionName(optionName)
+                .orElseThrow(NotFoundItemOptionException::new);
 
-        return itemRepository.save(itemDto.toEntity());
+        return itemRepository.save(itemDto.toEntity(itemOption));
     }
 
     @Transactional

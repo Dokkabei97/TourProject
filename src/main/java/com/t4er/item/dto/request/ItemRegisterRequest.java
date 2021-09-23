@@ -2,37 +2,36 @@ package com.t4er.item.dto.request;
 
 import com.t4er.item.domain.Item;
 import com.t4er.item.domain.option.ItemOption;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemRegisterRequest {
 
     @NotBlank(message = "상품 이름은 필수 항목입니다!")
     private String itemName;
-    @NotBlank(message = "상품 가격은 필수 항목입니다!")
+    @NotNull(message = "상품 가격은 필수 항목입니다!")
     private Long itemPrice;
-    @NotBlank(message = "상품 종류는 필수 항목입니다!")
-    private ItemOption itemOption;
+
+    private ItemOption optionName;
 
     @Builder
-    public ItemRegisterRequest(String itemName, Long itemPrice, ItemOption itemOption) {
+    public ItemRegisterRequest(String itemName, Long itemPrice, ItemOption optionName) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
-        this.itemOption = itemOption;
+        this.optionName = optionName;
     }
 
-    public Item toEntity() {
+    public Item toEntity(ItemOption optionName) {
         return Item.builder()
                 .itemName(itemName)
                 .itemPrice(itemPrice)
-                .itemOption(itemOption)
+                .itemOption(optionName)
                 .build();
     }
 }

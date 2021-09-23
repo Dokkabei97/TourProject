@@ -1,8 +1,43 @@
-POST http://localhost:8080/api/v1/items/register
+POST http://localhost:8080/api/v1/items/create
 Content-Type: application/json
 
 {
-  "itemName": "커피",
-  "itemPrice": 1500,
-  "itemOption": "FOOD"
+  "optionName": "FOOD"
 }
+
+###
+POST http://localhost:8080/api/v1/items/create
+Content-Type: application/json
+
+{
+  "optionName": "DRINK"
+}
+
+###
+POST http://localhost:8080/api/v1/items/register/FOOD
+Content-Type: application/json
+
+{
+  "itemName": "치킨",
+  "itemPrice": 7650
+}
+
+###
+POST http://localhost:8080/api/v1/items/register/FOOD
+Content-Type: application/json
+
+{
+  "itemName": "피자",
+  "itemPrice": 8300
+}
+
+###
+POST http://localhost:8080/api/v1/items/register/DRINK
+Content-Type: application/json
+
+{
+  "itemName": "아이스아메리카노",
+  "itemPrice": 1300
+}
+
+###

@@ -16,30 +16,18 @@ import java.util.List;
 @Table(name = "item_options")
 public class ItemOption extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
+    @Column(name = "item_options_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Option optionName; // 음식, 의류, 생활용품 ...
-
-    @Getter
-    @RequiredArgsConstructor
-    public enum Option {
-        NOT_OPTION("미정"),
-        FOOD("음식"),
-        DRINK("음료");
-
-        private final String description;
-    }
-
+    @Column(unique = true)
+    private String optionName;
 
     @OneToMany(mappedBy = "itemOption")
     private List<Item> itemList = Lists.newArrayList();
 
-    @Builder
-    public ItemOption(Option optionName) {
-        if (optionName == null) throw new InvalidParamException("ItemOption.optionName");
+    public ItemOption(String optionName) {
+        if (StringUtils.isBlank(optionName)) throw new InvalidParamException("ItemOption.optionName");
         this.optionName = optionName;
     }
 }

@@ -17,14 +17,15 @@ public class Item extends AbstractEntity {
 
     private final static String ITEM_PREFIX = "itm_";
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
+    @Column(name = "items_id")
     private Long id;
+    @Column(updatable = false)
     private String itemToken;
     private String itemName;
     private Long itemPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "item_options_id")
     private ItemOption itemOption;
 
@@ -58,13 +59,14 @@ public class Item extends AbstractEntity {
     public Item(String itemName, Long itemPrice, ItemOption itemOption) {
         if (StringUtils.isBlank(itemName)) throw new InvalidParamException("Item.itemName");
         if (itemPrice == null) throw new InvalidParamException("Item.itemPrice");
+        if (itemOption == null) throw new InvalidParamException("Item.itemOption");
 
         this.itemToken = TokenGenerator.randomCharacterWithPrefix(ITEM_PREFIX);
         this.itemName = itemName;
         this.itemPrice = itemPrice;
+        this.itemOption = itemOption;
         this.saleStatus = SaleStatus.PREPARE;
         this.itemStatus = ItemStatus.NEW;
-        this.itemOption = itemOption;
     }
 
     public void changeOnSale() {
@@ -79,8 +81,9 @@ public class Item extends AbstractEntity {
         this.itemStatus = ItemStatus.HOT;
     }
 
-    public void changeItemDiscount(Long itemPrice) {
-        this.itemPrice = itemPrice;
+    public void changeItemDiscount(Long itemPrice) { // 정책에 따라 결정
+//        this.itemPrice = itemPrice;
+        this.itemPrice = this.itemPrice - itemPrice;
         this.itemStatus = ItemStatus.DISCOUNT;
     }
 
