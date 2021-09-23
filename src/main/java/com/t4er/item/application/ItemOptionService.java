@@ -1,6 +1,5 @@
 package com.t4er.item.application;
 
-import com.t4er.item.domain.option.ItemOption;
 import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.exception.AlreadyCreatedItemOptionException;
 import com.t4er.item.infrastructure.option.ItemOptionRepository;
