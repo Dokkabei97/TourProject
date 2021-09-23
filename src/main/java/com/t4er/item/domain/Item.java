@@ -49,7 +49,7 @@ public class Item extends AbstractEntity {
     public enum ItemStatus {
         NEW("신상"),
         HOT("인기"),
-        SALE("세일");
+        DISCOUNT("할인");
 
         private final String description;
     }
@@ -79,8 +79,9 @@ public class Item extends AbstractEntity {
         this.itemStatus = ItemStatus.HOT;
     }
 
-    public void changeItemSale() {
-        this.itemStatus = ItemStatus.SALE;
+    public void changeItemDiscount(Long itemPrice) {
+        this.itemPrice = itemPrice;
+        this.itemStatus = ItemStatus.DISCOUNT;
     }
 
 }

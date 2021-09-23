@@ -7,14 +7,18 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @ToString
 public class ItemRegisterRequest {
 
-    // TODO: 2021-09-21 valid 추가
+    @NotBlank(message = "상품 이름은 필수 항목입니다!")
     private String itemName;
+    @NotBlank(message = "상품 가격은 필수 항목입니다!")
     private Long itemPrice;
+    @NotBlank(message = "상품 종류는 필수 항목입니다!")
     private ItemOption itemOption;
 
     @Builder
