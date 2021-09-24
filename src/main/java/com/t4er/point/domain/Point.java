@@ -2,6 +2,7 @@ package com.t4er.point.domain;
 
 import com.google.common.collect.Lists;
 import com.t4er.common.entity.AbstractEntity;
+import com.t4er.member.domain.Member;
 import com.t4er.point.domain.history.PointHistory;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,6 +22,10 @@ public class Point extends AbstractEntity {
     private Long id;
 
     private Long point;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "members_id")
+    private Member member;
 
     @OneToMany(mappedBy = "point")
     private List<PointHistory> pointHistory = Lists.newArrayList();

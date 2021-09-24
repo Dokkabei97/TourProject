@@ -77,4 +77,8 @@ public class ItemController {
     }
 
     // TODO: 2021-09-23 조회 + valid
+    @GetMapping
+    public ResponseEntity<?> itemAll() {
+        return ResponseEntity.ok().build();
+    }
 }
