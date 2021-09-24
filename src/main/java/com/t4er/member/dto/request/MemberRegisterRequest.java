@@ -3,6 +3,8 @@ package com.t4er.member.dto.request;
 import com.t4er.member.domain.Member;
 import lombok.*;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -11,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberRegisterRequest {
 
+    @Email(message = "이메일 형식을 맞춰 주세요!")
     @NotBlank(message = "이메일은 필수 항목입니다!")
     private String email;
     @NotBlank(message = "비밀번호는 필수 항목입니다!")
