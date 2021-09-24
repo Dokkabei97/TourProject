@@ -16,13 +16,15 @@ public class Order extends AbstractEntity {
 
     private static final String ORDER_PREFIX = "ord_";
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
+    @Column(name = "orders_id")
     private Long id;
 
+    @Column(updatable = false)
     private String orderToken;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "members_id")
     private Member member;
 
     private ZonedDateTime orderedAt;

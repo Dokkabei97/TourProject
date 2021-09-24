@@ -1,7 +1,9 @@
 package com.t4er.member.domain;
 
+import com.google.common.collect.Lists;
 import com.t4er.common.entity.AbstractEntity;
 import com.t4er.common.exception.InvalidParamException;
+import com.t4er.order.domain.Order;
 import com.t4er.point.domain.Point;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,6 +38,9 @@ public class Member extends AbstractEntity implements UserDetails {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "member")
     private Point point;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> orderList = Lists.newArrayList();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

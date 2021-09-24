@@ -17,8 +17,7 @@ import java.time.ZonedDateTime;
 @Table(name = "point_historys")
 public class PointHistory extends AbstractEntity {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "point_historys_id")
     private Long id;
 
@@ -31,7 +30,6 @@ public class PointHistory extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "points_id")
     private Point point;
-
 
     @Builder
     public PointHistory(String pointHistory, Long changedPoint, Point Point) {
