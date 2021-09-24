@@ -26,6 +26,7 @@ public class MemberRegisterRequest {
         return Member.builder()
                 .email(email)
                 .password(password)
+                .authority("ROLE_USER")
                 .build();
     }
 }
