@@ -1,12 +1,14 @@
 package com.t4er.member.application;
 
 import com.t4er.member.domain.Member;
+import com.t4er.member.dto.request.MemberRegisterRequest;
 import com.t4er.member.exception.AlreadyRegisterEmailException;
 import com.t4er.member.exception.AlreadyUseNickException;
 import com.t4er.member.exception.NotFoundEmailException;
 import com.t4er.member.exception.NotMatchPasswordException;
 import com.t4er.member.infrastructure.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,14 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public Member registerMember(String email, String password) {
-        if (memberRepository.countByEmail(email) != 0) {
+    public Member registerMember(MemberRegisterRequest memberDto) {
+        if (memberRepository.countByEmail(memberDto.getEmail()) != 0) {
             throw new AlreadyRegisterEmailException();
         }
 
-        return memberRepository.save(new Member(email, password));
+        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+        return memberRepository.save(memberDto.toEntity());
     }
 
     @Transactional

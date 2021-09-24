@@ -3,6 +3,7 @@ package com.t4er.member.domain;
 import com.google.common.collect.Lists;
 import com.t4er.common.entity.AbstractEntity;
 import com.t4er.common.exception.InvalidParamException;
+import com.t4er.common.util.TokenGenerator;
 import com.t4er.order.domain.Order;
 import com.t4er.point.domain.Point;
 import lombok.AccessLevel;
@@ -23,6 +24,8 @@ import java.util.List;
 @Table(name = "members")
 public class Member extends AbstractEntity implements UserDetails {
 
+    private final static String MEMBER_PREFIX = "mem_";
+
     @Id @GeneratedValue
     @Column(name = "members_id")
     private Long id;
@@ -32,6 +35,8 @@ public class Member extends AbstractEntity implements UserDetails {
     private boolean verifyEmail;
     private String password;
 
+    @Column(updatable = false)
+    private String memberToken;
     @Column(unique = true)
     private String nick;
     private String profileImage;
@@ -77,11 +82,13 @@ public class Member extends AbstractEntity implements UserDetails {
         if (StringUtils.isBlank(email)) throw new InvalidParamException("Member.email");
         if (StringUtils.isBlank(password)) throw new InvalidParamException("Member.password");
 
+        this.memberToken = TokenGenerator.randomCharacterWithPrefix(MEMBER_PREFIX);
         this.email = email;
         this.password = password;
         this.nick = email;
         this.profileImage = null;
         this.verifyEmail = false;
+        this.point = new Point(1000L);
     }
 
     public void updateMemberPassword(String password) {

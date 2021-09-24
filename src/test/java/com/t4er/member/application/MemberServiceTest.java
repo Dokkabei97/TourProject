@@ -1,6 +1,7 @@
 package com.t4er.member.application;
 
 import com.t4er.member.domain.Member;
+import com.t4er.member.dto.request.MemberRegisterRequest;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.Test;
@@ -23,33 +24,18 @@ class MemberServiceTest {
     @Test
     void 회원가입() throws Exception {
         // given
-        String email = "test@test.com";
-        String pwd = "1234";
+        MemberRegisterRequest memberDto = MemberRegisterRequest.builder()
+                .email("test@test.com")
+                .password("test1234!")
+                .build();
         // when
-        Member member = memberService.registerMember(email, pwd);
+        Member member = memberService.registerMember(memberDto);
         // then
         assertThat(member.getId()).isNotNull();
         assertThat(member.getEmail()).isEqualTo("test@test.com");
-//        assertThat(member.getPassword()).startsWith("{bcrypt}");
+        assertThat(member.getPassword()).startsWith("{bcrypt}");
         assertThat(member.getNick()).isEqualTo("test@test.com");
+        assertThat(member.getMemberToken()).startsWith("mem_");
         assertThat(member.getProfileImage()).isNull();
-//        then(member.getEmail()).isEqualTo("test@test.com");
-
-    }
-
-    @Test
-    void updateMemberPassword() {
-    }
-
-    @Test
-    void resetMemberPassword() {
-    }
-
-    @Test
-    void updateMemberProfile() {
-    }
-
-    @Test
-    void findByEmail() {
     }
 }
