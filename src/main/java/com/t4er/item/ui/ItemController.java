@@ -76,5 +76,5 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-    // TODO: 2021-09-23 조회
+    // TODO: 2021-09-23 조회 + valid
 }

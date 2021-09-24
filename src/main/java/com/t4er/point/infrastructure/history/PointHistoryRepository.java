@@ -1,4 +1,4 @@
-package com.t4er.point.infrastructure;
+package com.t4er.point.infrastructure.history;
 
 import com.t4er.point.domain.history.PointHistory;
 import org.springframework.data.jpa.repository.JpaRepository;

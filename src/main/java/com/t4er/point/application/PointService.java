@@ -1,6 +1,6 @@
 package com.t4er.point.application;
 
-import com.t4er.point.infrastructure.PointHistoryRepository;
+import com.t4er.point.infrastructure.history.PointHistoryRepository;
 import com.t4er.point.infrastructure.PointRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
