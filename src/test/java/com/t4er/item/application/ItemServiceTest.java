@@ -1,9 +1,13 @@
 package com.t4er.item.application;
 
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.t4er.item.domain.Item;
+import com.t4er.item.domain.QItem;
 import com.t4er.item.domain.option.ItemOption;
 import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.dto.request.ItemRegisterRequest;
+import com.t4er.item.dto.respones.ItemResponse;
 import com.t4er.item.infrastructure.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,8 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+
+import java.util.List;
+
 import static com.t4er.item.domain.Item.ItemStatus.*;
 import static com.t4er.item.domain.Item.SaleStatus.*;
+import static com.t4er.item.domain.QItem.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -26,6 +35,8 @@ class ItemServiceTest {
     ItemOptionService itemOptionService;
     @Autowired
     ItemRepository itemRepository;
+    @Autowired
+    EntityManager em;
 
     private Item itemEx() {
         ItemOptionCreateRequest option = new ItemOptionCreateRequest("테스트옵션");
@@ -99,5 +110,25 @@ class ItemServiceTest {
         // then
         assertThat(itemRepository.count()).isEqualTo(3);
     }
+
+    @Test
+    void 아이템_조회() throws Exception {
+        // given
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QItem qItem = item;
+        // when
+        List<ItemResponse> result = query.select(Projections.bean(ItemResponse.class,
+                item.itemToken,
+                item.itemName,
+                item.itemPrice))
+                .from(item)
+                .fetch();
+
+        for (ItemResponse response : result) {
+            System.out.println("response = " + response);
+        }
+        // then
+    }
+
 
 }

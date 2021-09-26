@@ -4,8 +4,8 @@ import com.t4er.member.domain.Member;
 import lombok.*;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -17,6 +17,7 @@ public class MemberRegisterRequest {
     @NotBlank(message = "이메일은 필수 항목입니다!")
     private String email;
     @NotBlank(message = "비밀번호는 필수 항목입니다!")
+    @Size(min = 6, max = 20, message = "비밀번호는 6~20글자 사이 입니다!")
     private String password;
 
     @Builder
