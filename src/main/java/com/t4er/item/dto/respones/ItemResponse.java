@@ -14,6 +14,5 @@ public class ItemResponse {
     private String itemToken;
     private String itemName;
     private Long itemPrice;
-//    private String itemOptionName;
-    
+
 }

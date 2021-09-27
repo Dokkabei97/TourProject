@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.persistence.*;
 
 @Getter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "items")

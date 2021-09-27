@@ -30,4 +30,11 @@ public class ItemOption extends AbstractEntity {
         if (StringUtils.isBlank(optionName)) throw new InvalidParamException("ItemOption.optionName");
         this.optionName = optionName;
     }
+
+    @Override
+    public String toString() {
+        return "ItemOption{" +
+                "optionName='" + optionName + '\'' +
+                '}';
+    }
 }

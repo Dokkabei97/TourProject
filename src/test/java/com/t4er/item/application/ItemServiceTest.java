@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -117,18 +118,48 @@ class ItemServiceTest {
         JPAQueryFactory query = new JPAQueryFactory(em);
         QItem qItem = item;
         // when
-        List<ItemResponse> result = query.select(Projections.bean(ItemResponse.class,
+        List<ItemResponse> result = query.select(Projections.fields(ItemResponse.class,
                 item.itemToken,
                 item.itemName,
                 item.itemPrice))
                 .from(item)
                 .fetch();
 
-        for (ItemResponse response : result) {
-            System.out.println("response = " + response);
-        }
+//        result.forEach(System.out::println);
         // then
+        assertThat(result.size()).isEqualTo(3);
     }
 
+    @Test
+    void 아이템_조회_페이지() throws Exception {
+        // given
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QItem qItem = item;
+        // when
+        List<ItemResponse> result = query.select(Projections.fields(ItemResponse.class,
+                item.itemToken,
+                item.itemName,
+                item.itemPrice))
+                .from(item)
+                .offset(1)
+                .limit(2)
+                .fetch();
+        // then
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void 아이템조회() throws Exception {
+        // given
+        JPAQueryFactory query = new JPAQueryFactory(em);
+        QItem qItem = item;
+        // when
+        List<Item> result = query.selectFrom(item)
+                .offset(0)
+                .limit(2)
+                .fetch();
+        // then
+        result.forEach(System.out::println);
+    }
 
 }
