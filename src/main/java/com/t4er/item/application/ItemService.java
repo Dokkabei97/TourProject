@@ -4,9 +4,11 @@ import com.t4er.item.domain.Item;
 import com.t4er.item.domain.option.ItemOption;
 import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.dto.request.ItemRegisterRequest;
+import com.t4er.item.dto.respones.ItemResponse;
 import com.t4er.item.exception.AlreadyRegisterItemException;
 import com.t4er.item.exception.NotFoundItemOptionException;
 import com.t4er.item.exception.NotFoundItemTokenException;
+import com.t4er.item.infrastructure.ItemCustomRepository;
 import com.t4er.item.infrastructure.ItemRepository;
 import com.t4er.item.infrastructure.option.ItemOptionRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,7 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
     private final ItemOptionRepository itemOptionRepository;
+    private final ItemCustomRepository itemCustomRepository;
 
     @Transactional
     public Item registerItem(ItemRegisterRequest itemDto, String optionName) {
@@ -71,4 +74,7 @@ public class ItemService {
     }
 
     // TODO: 2021-09-23 조회 추가
+    public ItemResponse test(String itemToken) {
+        return itemCustomRepository.itemInfoByItemToken(itemToken);
+    }
 }

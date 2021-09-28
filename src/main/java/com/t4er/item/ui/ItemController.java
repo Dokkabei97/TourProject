@@ -7,6 +7,7 @@ import com.t4er.item.domain.option.ItemOption;
 import com.t4er.item.dto.request.ItemChangeStatusRequest;
 import com.t4er.item.dto.request.ItemOptionCreateRequest;
 import com.t4er.item.dto.request.ItemRegisterRequest;
+import com.t4er.item.dto.respones.ItemResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -80,5 +81,12 @@ public class ItemController {
     @GetMapping
     public ResponseEntity<?> itemAll() {
         return ResponseEntity.ok().build();
+    }
+
+
+    @GetMapping("/test/{itemToken}")
+    public ResponseEntity<?> test(@PathVariable String itemToken) {
+        ItemResponse test = itemService.test(itemToken);
+        return ResponseEntity.ok().body(test);
     }
 }
