@@ -22,7 +22,7 @@ public class ItemController {
     private final ItemService itemService;
     private final ItemOptionService itemOptionService;
 
-    @PostMapping("/register/{optionName}")
+    @PostMapping("/{optionName}")
     public ResponseEntity<Void> registerItem(@RequestBody @Validated ItemRegisterRequest itemDto,
                                              @PathVariable String optionName,
                                              BindingResult result) {
@@ -34,7 +34,7 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/createItemOption")
     public ResponseEntity<Void> createItemOption(@RequestBody ItemOptionCreateRequest optionDto) {
         itemOptionService.createItemOption(optionDto);
 
@@ -70,7 +70,7 @@ public class ItemController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete-item")
+    @DeleteMapping
     public ResponseEntity<Void> deleteItem(@RequestBody ItemChangeStatusRequest request) {
         String itemToken = request.getItemToken();
         itemService.deleteItem(itemToken);
