@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "items")
 public class Item extends AbstractEntity {
@@ -55,6 +56,7 @@ public class Item extends AbstractEntity {
 
         private final String description;
     }
+/*
 
     @Builder
     public Item(String itemName, Long itemPrice, ItemOption itemOption) {
@@ -68,6 +70,18 @@ public class Item extends AbstractEntity {
         this.itemOption = itemOption;
         this.saleStatus = SaleStatus.PREPARE;
         this.itemStatus = ItemStatus.NEW;
+    }
+*/
+
+    public static Item create(String itemName, Long itemPrice, ItemOption itemOption) {
+        return new Item(null,
+                TokenGenerator.randomCharacterWithPrefix(ITEM_PREFIX),
+                itemName,
+                itemPrice,
+                itemOption,
+                SaleStatus.PREPARE, 
+                ItemStatus.NEW
+        );
     }
 
     public void changeOnSale() {
