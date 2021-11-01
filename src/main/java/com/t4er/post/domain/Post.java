@@ -19,9 +19,13 @@ public class Post {
     @Column(name = "posts_id")
     private Long id;
 
+    @Column(updatable = false)
+    private String postToken;
     private String title;
     @Lob
     private String content;
+
+    private String postImages;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "members_id")
